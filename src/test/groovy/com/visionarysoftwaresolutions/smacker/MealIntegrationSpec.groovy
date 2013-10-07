@@ -1,6 +1,7 @@
 package com.visionarysoftwaresolutions.smacker
 
 import com.visionarysoftwaresolutions.smacker.api.Meal
+import com.visionarysoftwaresolutions.smacker.api.MealDay
 import com.visionarysoftwaresolutions.smacker.api.Meals
 import com.visionarysoftwaresolutions.smacker.api.Smacker
 import com.visionarysoftwaresolutions.smacker.api.User
@@ -8,7 +9,7 @@ import org.joda.time.DateTime
 
 /**
  * User: Master
- * Date: 10/6/13
+ * MealDay: 10/6/13
  * Time: 10:50 PM
  */
 class MealIntegrationSpec extends spock.lang.Specification {
@@ -20,7 +21,10 @@ class MealIntegrationSpec extends spock.lang.Specification {
         when: "nick logs the meal"
             nick.log(dinner)
         then: "the meal log for october 6th contains dinner"
-            Meals eaten = nick.getMealsForDate(new DateTime())
+            Meals eaten = nick.getMealsFor([
+                    month:"October",
+                    day: "6th",
+                    year: "2013"] as MealDay)
             eaten.has(dinner) == true
     }
 

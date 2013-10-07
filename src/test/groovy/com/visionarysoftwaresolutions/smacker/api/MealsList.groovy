@@ -2,7 +2,7 @@ package com.visionarysoftwaresolutions.smacker.api
 
 /**
  * User: Master
- * Date: 10/7/13
+ * MealDay: 10/7/13
  * Time: 12:05 AM
  */
 class MealsList implements Meals {

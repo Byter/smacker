@@ -1,10 +1,8 @@
 package com.visionarysoftwaresolutions.smacker.api
 
-import org.joda.time.DateTime
-
 /**
  * User: Master
- * Date: 10/6/13
+ * MealDay: 10/6/13
  * Time: 11:54 PM
  */
 class MemoryMealLog implements MealLog {
@@ -22,7 +20,7 @@ class MemoryMealLog implements MealLog {
     }
 
     @Override
-    Meals getMealsForDate(DateTime date) {
+    Meals getMealsFor(MealDay date) {
         return meals
     }
 }

@@ -1,10 +1,7 @@
 package com.visionarysoftwaresolutions.smacker.api
-
-import org.joda.time.DateTime
-
 /**
  * User: Master
- * Date: 10/7/13
+ * MealDay: 10/7/13
  * Time: 12:21 AM
  */
 class Smacker implements User {
@@ -17,8 +14,8 @@ class Smacker implements User {
     }
 
     @Override
-    Meals getMealsForDate(DateTime targetDate) {
-        log.getMealsForDate(targetDate)
+    Meals getMealsFor(MealDay targetDate) {
+        log.getMealsFor(targetDate)
     }
 
     @Override

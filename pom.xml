@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.visionarysoftwaresolutions</groupId>
+	<artifactId>smacker</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+	<name>Smacker</name>
+	<url>http://www.github.com/leadVisionary/smacker</url>
+	<description>A personal meal log/management system </description>
+	<inceptionYear>October 2013</inceptionYear>
+	<organization>
+		<name>Visionary Software Solutions</name>
+		<url>http://www.visionarysoftwaresolutions.com</url>
+	</organization>
+	<scm>
+		<url>http://www.github.com/leadVisionary/smacker</url>
+	</scm>
+	<dependencies>
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-core</artifactId>
+			<version>0.6-groovy-1.8</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>repo</id>
+			<url>https://github.com/leadVisionary/mvn-repo/raw/master/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshot-repo</id>
+			<url>https://github.com/leadVisionary/mvn-repo/raw/master/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>
+

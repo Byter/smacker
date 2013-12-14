@@ -1,4 +1,7 @@
-package com.visionarysoftwaresolutions.smacker.api
+package com.visionarysoftwaresolutions.smacker
+
+import com.visionarysoftwaresolutions.smacker.api.Meal
+import com.visionarysoftwaresolutions.smacker.api.Meals
 
 /**
  * User: Master

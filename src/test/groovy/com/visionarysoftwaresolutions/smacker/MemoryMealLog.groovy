@@ -1,9 +1,9 @@
 package com.visionarysoftwaresolutions.smacker
 
-import com.visionarysoftwaresolutions.smacker.api.Meal
-import com.visionarysoftwaresolutions.smacker.api.MealDay
-import com.visionarysoftwaresolutions.smacker.api.MealLog
-import com.visionarysoftwaresolutions.smacker.api.Meals
+import com.visionarysoftwaresolutions.smacker.api.meals.Meal
+import com.visionarysoftwaresolutions.smacker.api.meals.MealDay
+import com.visionarysoftwaresolutions.smacker.api.meals.MealLog
+import com.visionarysoftwaresolutions.smacker.api.meals.Meals
 import com.visionarysoftwaresolutions.smacker.api.User
 
 /**
@@ -13,7 +13,7 @@ import com.visionarysoftwaresolutions.smacker.api.User
  */
 class MemoryMealLog implements MealLog {
     User belongsTo
-    Meals meals = new MealsList();
+    Map<MealDay, Meals> consumed = [:];
 
     @Override
     User getOwner() {
@@ -22,11 +22,20 @@ class MemoryMealLog implements MealLog {
 
     @Override
     void log(Meal toLog) {
-        meals.add(toLog);
+        MealDay whenEaten = toLog.eatenAt()
+        if (consumed.containsKey(whenEaten)) {
+            Meals previouslyEaten = consumed.get(whenEaten)
+            previouslyEaten.add(toLog)
+        } else {
+            Meals newlyEaten = new MealsList()
+            newlyEaten.add(toLog)
+            consumed.put(whenEaten, newlyEaten)
+        }
     }
 
     @Override
     Meals getMealsFor(MealDay date) {
-        return meals
+        Meals found = consumed.get(date)
+        found ? found : new NoMealsEaten()
     }
 }

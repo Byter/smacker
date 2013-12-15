@@ -1,4 +1,4 @@
-package com.visionarysoftwaresolutions.smacker.api;
+package com.visionarysoftwaresolutions.smacker.api.meals;
 
 /**
  * User: Master

@@ -4,20 +4,20 @@ import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals
 
 /**
+ * Created with IntelliJ IDEA.
  * User: Master
- * MealDay: 10/7/13
- * Time: 12:05 AM
+ * Date: 12/14/13
+ * Time: 4:04 PM
+ * To change this template use File | Settings | File Templates.
  */
-class MealsList implements Meals {
-    List<Meal> meals = []
-
+class NoMealsEaten implements Meals {
     @Override
     void add(Meal toAdd) {
-        meals.add(toAdd)
+        throw new UnsupportedOperationException("cannot add to null object")
     }
 
     @Override
     boolean has(Meal toCheck) {
-        meals.contains(toCheck)
+        false
     }
 }

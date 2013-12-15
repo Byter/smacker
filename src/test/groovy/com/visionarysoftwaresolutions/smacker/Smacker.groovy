@@ -1,9 +1,9 @@
 package com.visionarysoftwaresolutions.smacker
 
-import com.visionarysoftwaresolutions.smacker.api.Meal
-import com.visionarysoftwaresolutions.smacker.api.MealDay
-import com.visionarysoftwaresolutions.smacker.api.MealLog
-import com.visionarysoftwaresolutions.smacker.api.Meals
+import com.visionarysoftwaresolutions.smacker.api.meals.Meal
+import com.visionarysoftwaresolutions.smacker.api.meals.MealDay
+import com.visionarysoftwaresolutions.smacker.api.meals.MealLog
+import com.visionarysoftwaresolutions.smacker.api.meals.Meals
 import com.visionarysoftwaresolutions.smacker.api.User
 
 /**

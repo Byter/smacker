@@ -1,6 +1,7 @@
-package com.visionarysoftwaresolutions.smacker.api;
+package com.visionarysoftwaresolutions.smacker.api.meals;
 
 import com.visionarysoftwaresolutions.describable.Describable;
+import com.visionarysoftwaresolutions.smacker.api.nutrition.TotalIntake;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface Meal extends Describable {
     MealDay eatenAt();
     void addItem(MealItem eaten);
     List<MealItem> getItems();
+    TotalIntake getTotalIntake();
 }

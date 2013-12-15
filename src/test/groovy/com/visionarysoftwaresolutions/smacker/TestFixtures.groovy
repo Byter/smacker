@@ -1,6 +1,7 @@
 package com.visionarysoftwaresolutions.smacker
 
-import com.visionarysoftwaresolutions.smacker.api.Meal
+import com.visionarysoftwaresolutions.smacker.api.meals.Meal
+import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
 import com.visionarysoftwaresolutions.smacker.api.User
 
 /**
@@ -16,5 +17,17 @@ class TestFixtures {
     }
     static Meal createDinner() {
         new Dinner()
+    }
+
+    static MealItem canOTuna() {
+        [
+
+        ] as MealItem
+    }
+
+    static MealItem fiberPlusBar() {
+        [
+
+        ] as MealItem
     }
 }

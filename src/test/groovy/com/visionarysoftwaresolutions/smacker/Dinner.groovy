@@ -1,8 +1,9 @@
 package com.visionarysoftwaresolutions.smacker
 
-import com.visionarysoftwaresolutions.smacker.api.Meal
-import com.visionarysoftwaresolutions.smacker.api.MealDay
-import com.visionarysoftwaresolutions.smacker.api.MealItem
+import com.visionarysoftwaresolutions.smacker.api.meals.Meal
+import com.visionarysoftwaresolutions.smacker.api.meals.MealDay
+import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
+import com.visionarysoftwaresolutions.smacker.api.nutrition.TotalIntake
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,6 +27,13 @@ class Dinner implements Meal {
     @Override
     List<MealItem> getItems() {
         Collections.unmodifiableList(items)
+    }
+
+    @Override
+    TotalIntake getTotalIntake() {
+        //TODO: iterate across items. Grab nutritional info.
+        // sum up and create total intake object.
+        return null  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

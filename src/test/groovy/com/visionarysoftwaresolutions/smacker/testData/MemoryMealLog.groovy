@@ -1,4 +1,4 @@
-package com.visionarysoftwaresolutions.smacker
+package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealDay

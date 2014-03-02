@@ -1,20 +1,16 @@
-package com.visionarysoftwaresolutions.smacker
+package com.visionarysoftwaresolutions.smacker.testData
 
+import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
-import com.visionarysoftwaresolutions.smacker.api.User
+import com.visionarysoftwaresolutions.smacker.api.nutrition.analysis.TotalIntakeAnalyzer
 
-/**
- * Created with IntelliJ IDEA.
- * User: Master
- * Date: 12/14/13
- * Time: 3:05 PM
- * To change this template use File | Settings | File Templates.
- */
 class TestFixtures {
-    static User createNick() {
+    
+	static User createNick() {
         new Smacker(name:"Nick", description:"test")
     }
+	
     static Meal createDinner() {
         new Dinner()
     }
@@ -30,4 +26,8 @@ class TestFixtures {
 
         ] as MealItem
     }
+	
+	static TotalIntakeAnalyzer intakeAnalyzer() {
+		new BasicIntakeAnalyzer()
+	}
 }

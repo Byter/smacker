@@ -29,6 +29,11 @@ class Smacker implements User {
 	}
 
     @Override
+    void createReminder(MealTime mealTime) {
+        schedule.addReminder(mealTime)
+    }
+
+    @Override
     String getName() {
         name
     }

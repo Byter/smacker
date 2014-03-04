@@ -1,9 +1,5 @@
 package com.visionarysoftwaresolutions.smacker.api.meals;
 
-import com.visionarysoftwaresolutions.smacker.api.User;
-
-public interface MealLog {
-    User getOwner();
+public interface MealLog extends MealRepository {
     void log(Meal toLog);
-    Meals getMealsFor(MealDay mealDay);
 }

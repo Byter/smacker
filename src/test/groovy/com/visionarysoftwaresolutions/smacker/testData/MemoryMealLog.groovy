@@ -1,25 +1,9 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
-import com.visionarysoftwaresolutions.smacker.api.meals.Meal
-import com.visionarysoftwaresolutions.smacker.api.meals.MealDay
-import com.visionarysoftwaresolutions.smacker.api.meals.MealLog
-import com.visionarysoftwaresolutions.smacker.api.meals.Meals
+import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.User
 
-/**
- * User: Master
- * MealDay: 10/6/13
- * Time: 11:54 PM
- */
-class MemoryMealLog implements MealLog {
-    User belongsTo
-    Map<MealDay, Meals> consumed = [:];
-
-    @Override
-    User getOwner() {
-        return belongsTo;
-    }
-
+class MemoryMealLog extends MemoryMealRepository implements MealLog {
     @Override
     void log(Meal toLog) {
         MealDay whenEaten = toLog.eatenAt()
@@ -31,11 +15,5 @@ class MemoryMealLog implements MealLog {
             newlyEaten.add(toLog)
             consumed.put(whenEaten, newlyEaten)
         }
-    }
-
-    @Override
-    Meals getMealsFor(MealDay date) {
-        Meals found = consumed.get(date)
-        found ? found : new NoMealsEaten()
     }
 }

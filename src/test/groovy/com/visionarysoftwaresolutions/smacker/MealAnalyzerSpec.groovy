@@ -9,9 +9,7 @@ import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
 class MealAnalyzerSpec extends spock.lang.Specification {
 	
 	def "can analyze nick's meal"() {
-		given: "the existence of a user Nick"
-			User nick = TestFixtures.createNick()
-		and: "Nick eats a meal at 6 pm of 2 cans of tuna and a fiber plus bar"
+		given: "a meal consisting of 2 cans of tuna and a fiber plus bar"
 			Meal dinner = TestFixtures.createDinner()
 			MealItem canOTuna = TestFixtures.canOTuna()
 			MealItem fiberPlusBar = TestFixtures.fiberPlusBar()
@@ -41,10 +39,10 @@ class MealAnalyzerSpec extends spock.lang.Specification {
 		and: "total sodium of 4.35g"
             Sodium sod = nut.getSodium()
             sod.total.value == 4.35
-        and: "intake has total protein of 50g"
+        and: "total protein of 50g"
             Protein pro = nut.getProtein()
             pro.total.value == 50
-        and: "intake has vitamins"
+        and: "has vitamins"
             Vitamins vita = nut.getVitamins()
             vita != null
         and: "Vitamin A is 0%"
@@ -67,6 +65,5 @@ class MealAnalyzerSpec extends spock.lang.Specification {
             vita.getPercent("B12") == 40
         and: "Selenium is 280%"
             vita.getPercent("Selenium") == 280
-	
 	}
 }

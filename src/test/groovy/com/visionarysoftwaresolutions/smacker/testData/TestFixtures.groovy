@@ -1,9 +1,14 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
+import com.visionarysoftwaresolutions.smacker.NationalHeartAndBloodInstituteBMI
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.nutrition.analysis.TotalIntakeAnalyzer
+import com.visionarysoftwaresolutions.smacker.api.physique.BMI
+import com.visionarysoftwaresolutions.smacker.api.physique.BodyFat
+import com.visionarysoftwaresolutions.smacker.api.physique.Height
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
+import com.visionarysoftwaresolutions.smacker.api.physique.Weight
 
 class TestFixtures {
     
@@ -57,9 +62,28 @@ class TestFixtures {
 		new BasicIntakeAnalyzer()
 	}
 
-    static Physique createPhysique() {
-        [
+    static Weight twoHundredTenPounds() {
+        new ImperialWeight(value: 210)
+    }
 
+    static Height fiveFeetElevenInches() {
+        new ImperialHeight(value:12*5+11)
+    }
+
+    static BodyFat twentyThreePercentBodyFat() {
+        new BodyFatPercentage(value:23)
+    }
+
+    static BMI twentyOnePointNineBMI() {
+        new NationalHeartAndBloodInstituteBMI(value:21.9)
+    }
+
+    static Physique createImperialPhysique() {
+        [
+            getWeight : { twoHundredTenPounds() },
+            getHeight : { fiveFeetElevenInches() },
+            getBodyFat : { twentyThreePercentBodyFat() } ,
+            getBMI : { twentyOnePointNineBMI() }
         ] as Physique
     }
 }

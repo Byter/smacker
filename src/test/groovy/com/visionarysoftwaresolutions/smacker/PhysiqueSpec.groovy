@@ -3,6 +3,8 @@ package com.visionarysoftwaresolutions.smacker
 import com.visionarysoftwaresolutions.smacker.api.meals.MealTime
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.User
+import com.visionarysoftwaresolutions.smacker.testData.BodyFatPercentage
+import com.visionarysoftwaresolutions.smacker.testData.ImperialHeight
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
 
 class PhysiqueSpec extends spock.lang.Specification {
@@ -10,7 +12,7 @@ class PhysiqueSpec extends spock.lang.Specification {
         given: "the existence of a user Nick"
             User nick = TestFixtures.createNick()
         and: "he updates his physical information"
-            Physique current = TestFixtures.createPhysique()
+            Physique current = TestFixtures.createImperialPhysique()
         when: "nick logs his current physique"
             nick.log(current)
         then: "nick has his physique correctly set"
@@ -22,12 +24,32 @@ class PhysiqueSpec extends spock.lang.Specification {
         given: "the existence of a user Nick"
             User nick = TestFixtures.createNick()
         and: "he updates his physical information"
-            Physique current = TestFixtures.createPhysique()
+            Physique current = TestFixtures.createImperialPhysique()
             MealTime planned = TestFixtures.createMealTimeTwoDaysAway()
         when: "nick logs his current physique"
             nick.logFor(current, planned)
         then: "nick has his physique correctly set"
             Physique result = nick.getPhysiqueFor(planned)
             result == current
+    }
+
+    def "user can see their weight in pounds"() {
+        given: "the existence of a user Nick"
+            User nick = TestFixtures.createNick()
+        and: "he updates his physical information"
+            Physique current = TestFixtures.createImperialPhysique()
+        when: "nick logs his current physique"
+            nick.log(current)
+        then: "nick has his physique correctly set"
+            Physique result = nick.getPhysiqueFor(TestFixtures.createMealTimeNow())
+            result == current
+        and: "his weight is 210 lbs"
+            result.weight == TestFixtures.twoHundredTenPounds()
+        and: "his height is 5 feet 11 inches"
+            result.height == TestFixtures.fiveFeetElevenInches()
+        and: "his body fat percentage is 23"
+            result.bodyFat == TestFixtures.twentyThreePercentBodyFat()
+        and: "his BMI is 21.9"
+            result.BMI == TestFixtures.twentyOnePointNineBMI()
     }
 }

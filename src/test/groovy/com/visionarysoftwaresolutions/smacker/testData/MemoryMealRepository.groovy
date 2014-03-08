@@ -7,16 +7,15 @@ import com.visionarysoftwaresolutions.smacker.api.User
 
 abstract class MemoryMealRepository implements MealRepository {
 	User belongsTo
-	Map<MealDay, Meals> consumed = [:];
+	Map<MealDay, Meals> consumed = [:]
 
 	@Override
 	User getOwner() {
-		return belongsTo;
+		belongsTo
 	}
 	
 	@Override
 	Meals getMealsFor(MealDay date) {
-		Meals found = consumed.get(date)
-		found ? found : new NoMealsEaten()
+		consumed.get(date) ?: new NoMealsEaten()
 	}
 }

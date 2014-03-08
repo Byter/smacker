@@ -18,4 +18,9 @@ class NoMealsEaten implements Meals {
     boolean isEmpty() {
         true
     }
+
+    @Override
+    Iterator<Meal> iterator() {
+        throw new UnsupportedOperationException("no meals to iterate through")
+    }
 }

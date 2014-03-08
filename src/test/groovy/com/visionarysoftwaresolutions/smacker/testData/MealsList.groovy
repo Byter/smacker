@@ -20,4 +20,9 @@ class MealsList implements Meals {
     boolean isEmpty() {
         return meals.isEmpty()
     }
+
+    @Override
+    Iterator<Meal> iterator() {
+        meals.iterator()
+    }
 }

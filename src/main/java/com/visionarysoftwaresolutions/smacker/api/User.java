@@ -11,4 +11,5 @@ public interface User extends Describable {
     void schedule(MealTime mealTime, Meal planned);
     Meals plannedMealsOn(MealDay targetDay);
     void createReminder(MealTime mealTime);
+    void receive(MealNotification p);
 }

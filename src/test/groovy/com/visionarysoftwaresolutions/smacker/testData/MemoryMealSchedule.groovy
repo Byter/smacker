@@ -19,7 +19,7 @@ class MemoryMealSchedule extends MemoryMealRepository implements MealSchedule {
     @Override
     void addReminder(MealTime scheduled) {
         Meals toEat = new MealsList()
-        toEat.add([] as Meal)
+        toEat.add([ eatenAt : scheduled ] as Meal)
         consumed.put(scheduled, toEat)
     }
 }

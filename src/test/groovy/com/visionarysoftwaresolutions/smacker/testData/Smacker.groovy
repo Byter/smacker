@@ -34,6 +34,11 @@ class Smacker implements User {
     }
 
     @Override
+    void receive(MealNotification p) {
+        println p
+    }
+
+    @Override
     String getName() {
         name
     }

@@ -33,7 +33,7 @@ class PhysiqueSpec extends spock.lang.Specification {
             result == current
     }
 
-    def "user can see their weight in pounds"() {
+    def "user can see their physique in imperial units"() {
         given: "the existence of a user Nick"
             User nick = TestFixtures.createNick()
         and: "he updates his physical information"
@@ -51,5 +51,25 @@ class PhysiqueSpec extends spock.lang.Specification {
             result.bodyFat == TestFixtures.twentyThreePercentBodyFat()
         and: "his BMI is 21.9"
             result.BMI == TestFixtures.twentyOnePointNineBMI()
+    }
+
+    def "user can see their physique in metric units"() {
+        given: "the existence of a user Nick"
+        User nick = TestFixtures.createNick()
+        and: "he updates his physical information"
+        Physique current = TestFixtures.createMetricPhysique()
+        when: "nick logs his current physique"
+        nick.log(current)
+        then: "nick has his physique correctly set"
+        Physique result = nick.getPhysiqueFor(TestFixtures.createMealTimeNow())
+        result == current
+        and: "his weight is 95 kilos"
+        result.weight == TestFixtures.ninetyFiveKilos()
+        and: "his height is 1.8 meters"
+        result.height == TestFixtures.onePointEightMeters()
+        and: "his body fat percentage is 23"
+        result.bodyFat == TestFixtures.twentyThreePercentBodyFat()
+        and: "his BMI is 21.9"
+        result.BMI == TestFixtures.twentyOnePointNineBMI()
     }
 }

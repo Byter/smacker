@@ -11,8 +11,8 @@ import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.physique.Weight
 
 class TestFixtures {
-    
-	static User createNick() {
+
+    static User createNick() {
         new Smacker(name:"Nick", description:"test")
     }
 	
@@ -85,5 +85,22 @@ class TestFixtures {
             getBodyFat : { twentyThreePercentBodyFat() } ,
             getBMI : { twentyOnePointNineBMI() }
         ] as Physique
+    }
+
+    static Physique createMetricPhysique() {
+        [
+            getWeight : { ninetyFiveKilos() },
+            getHeight : { onePointEightMeters() },
+            getBodyFat : { twentyThreePercentBodyFat() } ,
+            getBMI : { twentyOnePointNineBMI() }
+        ] as Physique
+    }
+
+    static Weight ninetyFiveKilos() {
+        new MetricWeight(value:95)
+    }
+
+    static Height onePointEightMeters() {
+        new MetricHeight(value:1.8)
     }
 }

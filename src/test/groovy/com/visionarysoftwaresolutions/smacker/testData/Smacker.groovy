@@ -2,11 +2,14 @@ package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.User
+import com.visionarysoftwaresolutions.smacker.api.physique.Physique
+import com.visionarysoftwaresolutions.smacker.api.physique.PhysiqueLog
 
 class Smacker implements User {
     String name, description
     MealLog log = new MemoryMealLog(belongsTo: this)
     MealSchedule schedule = new MemoryMealSchedule(belongsTo:this)
+    PhysiqueLog bodies = new MemoryPhysiqueLog(owner:this)
 	
     @Override
     void log(Meal toLog) {
@@ -36,6 +39,21 @@ class Smacker implements User {
     @Override
     void receive(MealNotification p) {
         println p
+    }
+
+    @Override
+    void log(Physique physique) {
+        bodies.log(physique)
+    }
+
+    @Override
+    void logFor(Physique physique, MealTime time) {
+        bodies.logFor(physique, time)
+    }
+
+    @Override
+    Physique getPhysiqueFor(MealTime time) {
+        bodies.getPhysiqueFor(time)
     }
 
     @Override

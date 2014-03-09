@@ -1,15 +1,19 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
+import com.visionarysoftwaresolutions.smacker.api.diet.Allergy
+import com.visionarysoftwaresolutions.smacker.api.diet.DietaryRestriction
 import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.physique.PhysiqueLog
+import groovy.transform.Immutable
 
 class Smacker implements User {
     String name, description
     MealLog log = new MemoryMealLog(belongsTo: this)
     MealSchedule schedule = new MemoryMealSchedule(belongsTo:this)
     PhysiqueLog bodies = new MemoryPhysiqueLog(owner:this)
+    Set<DietaryRestriction> restrictions = new HashSet<DietaryRestriction>()
 	
     @Override
     void log(Meal toLog) {
@@ -54,6 +58,32 @@ class Smacker implements User {
     @Override
     Physique getPhysiqueFor(MealTime time) {
         bodies.getPhysiqueFor(time)
+    }
+
+    @Override
+    void addDietaryRestriction(DietaryRestriction restriction) {
+        restrictions += restriction
+    }
+
+    @Override
+    Set<DietaryRestriction> getDietaryRestrictions() {
+        Collections.unmodifiableCollection(restrictions)
+    }
+
+    @Override
+    void addAllergy(String allergen, String severity) {
+        restrictions += new Allergy() {
+
+            @Override
+            String getAllergen() {
+                allergen
+            }
+
+            @Override
+            String getSeverity() {
+                severity
+            }
+        }
     }
 
     @Override

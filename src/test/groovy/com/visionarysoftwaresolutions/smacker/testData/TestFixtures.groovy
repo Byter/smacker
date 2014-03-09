@@ -2,6 +2,15 @@ package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.NationalHeartAndBloodInstituteBMI
 import com.visionarysoftwaresolutions.smacker.api.User
+import com.visionarysoftwaresolutions.smacker.api.diet.Allergy
+import com.visionarysoftwaresolutions.smacker.api.diet.Diabetes
+import com.visionarysoftwaresolutions.smacker.api.diet.DietaryRestriction
+import com.visionarysoftwaresolutions.smacker.api.diet.GlutenFree
+import com.visionarysoftwaresolutions.smacker.api.diet.Halal
+import com.visionarysoftwaresolutions.smacker.api.diet.Kosher
+import com.visionarysoftwaresolutions.smacker.api.diet.LactoseIntolerant
+import com.visionarysoftwaresolutions.smacker.api.diet.Vegan
+import com.visionarysoftwaresolutions.smacker.api.diet.Vegetarian
 import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.nutrition.analysis.TotalIntakeAnalyzer
 import com.visionarysoftwaresolutions.smacker.api.physique.BMI
@@ -9,6 +18,7 @@ import com.visionarysoftwaresolutions.smacker.api.physique.BodyFat
 import com.visionarysoftwaresolutions.smacker.api.physique.Height
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.physique.Weight
+import groovy.time.TimeDuration
 
 class TestFixtures {
 
@@ -34,28 +44,11 @@ class TestFixtures {
 	
 	static MealTime createMealTimeTwoDaysAway() {
 		Date twoDaysAway = new Date() + 2
-		GregorianCalendar cal = new GregorianCalendar()
-		cal.time = twoDaysAway
-		[
-			year : String.format('%tY', cal),
-			month : String.format('%tB', cal),
-			day : String.format('%td', cal),
-			hour : String.format('%tH', cal),
-			minute: String.format('%tM', cal)
-		] as MealTime
+		new AtSomePoint(twoDaysAway)
 	}
 
     static MealTime createMealTimeNow() {
-        Date now = new Date()
-        GregorianCalendar cal = new GregorianCalendar()
-        cal.time = now
-        [
-                year : String.format('%tY', cal),
-                month : String.format('%tB', cal),
-                day : String.format('%td', cal),
-                hour : String.format('%tH', cal),
-                minute: String.format('%tM', cal)
-        ] as MealTime
+        new RightNow()
     }
 	
 	static TotalIntakeAnalyzer intakeAnalyzer() {
@@ -102,5 +95,66 @@ class TestFixtures {
 
     static Height onePointEightMeters() {
         new MetricHeight(value:1.8)
+    }
+
+    static User createBarb() {
+        new Smacker(name:"Barb", description:"test")
+    }
+
+    static Diabetes createDiabetes() {
+        new Diabetes() {}
+    }
+
+    static DietaryRestriction createGlutenFree() {
+        new GlutenFree() {
+            @Override
+            String getSeverity() {
+                return "medium"
+            }
+        }
+    }
+
+    static DietaryRestriction createOysterAllergy() {
+        new Allergy() {
+            @Override
+            String getAllergen() {
+                return "oyster"
+            }
+
+            @Override
+            String getSeverity() {
+                return "severe"
+            }
+        }
+    }
+
+    static Allergy createLactoseIntolerance() {
+        new LactoseIntolerant() {
+            @Override
+            String getSeverity() {
+                "severe"
+            }
+        }
+    }
+
+    static DietaryRestriction createVegetarian() {
+        new Vegetarian() { }
+    }
+
+    static DietaryRestriction createVegan() {
+        new Vegan() { }
+    }
+
+    static DietaryRestriction createKosher() {
+        new Kosher() { }
+    }
+
+    static DietaryRestriction createHalal() {
+        new Halal() { }
+    }
+
+    static MealTime createMealTimeIn20Minutes() {
+        Date thirtyMinutes = new TimeDuration(0,20,0,0) + new Date()
+        new AtSomePoint(thirtyMinutes)
     }
 }

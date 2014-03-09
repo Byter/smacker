@@ -16,7 +16,7 @@ class MealReminderSpec extends spock.lang.Specification {
             MealTime target = TestFixtures.createMealTimeTwoDaysAway()
         when: "nick creates a meal reminder"
             nick.createReminder(target)
-        then: "the meal plan has an empty meal"
+        then: "the meal plan has a meal"
             Meals eaten = nick.plannedMealsOn(target)
             eaten.isEmpty() == false
     }
@@ -26,8 +26,8 @@ class MealReminderSpec extends spock.lang.Specification {
             MealSchedule schedule = new MemoryMealSchedule()
             User nick = Mock(User)
             schedule.belongsTo = nick
-        and: "a plan to eat two days from now is on the schedule"
-            MealTime target = TestFixtures.createMealTimeTwoDaysAway()
+        and: "a plan to eat today is on the schedule"
+            MealTime target = TestFixtures.createMealTimeIn20Minutes()
             schedule.addReminder(target)
         and: "a meal assistant is created to remind him"
             MealAssistant ass = new BasicMealAssistant(schedule)

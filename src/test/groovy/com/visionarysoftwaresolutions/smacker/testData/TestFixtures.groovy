@@ -1,6 +1,5 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
-import com.visionarysoftwaresolutions.smacker.NationalHeartAndBloodInstituteBMI
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy

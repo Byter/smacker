@@ -45,11 +45,11 @@ class TestFixtures {
 	
 	static MealTime createMealTimeTwoDaysAway() {
 		Date twoDaysAway = new Date() + 2
-		new AtSomePoint(twoDaysAway)
+		new SomeMealTime(twoDaysAway)
 	}
 
     static MealTime createMealTimeNow() {
-        new RightNow()
+        new SomeMealTime(new Date())
     }
 	
 	static TotalIntakeAnalyzer intakeAnalyzer() {
@@ -142,7 +142,7 @@ class TestFixtures {
 
     static MealTime createMealTimeIn20Minutes() {
         Date thirtyMinutes = new TimeDuration(0,20,0,0) + new Date()
-        new AtSomePoint(thirtyMinutes)
+        new SomeMealTime(thirtyMinutes)
     }
 
     static Diet anythingDiet() {

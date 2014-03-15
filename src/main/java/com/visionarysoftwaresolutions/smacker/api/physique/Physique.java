@@ -3,7 +3,7 @@ package com.visionarysoftwaresolutions.smacker.api.physique;
 import com.visionarysoftwaresolutions.smacker.api.User;
 
 public interface Physique {
-    User belongsTo();
+    User getOwner();
     Weight getWeight();
     Height getHeight();
     BMI getBMI();

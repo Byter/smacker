@@ -19,7 +19,7 @@ class BasicMealAssistant implements MealAssistant {
 
     @Override
     void run() {
-        MealDay today = new Today()
+        MealDay today = new SomeMealTime(new Date())
         Meals planned = theSchedule.getMealsFor(today)
         planned.each { meal ->
             MealTime eaten = meal.eatenAt()

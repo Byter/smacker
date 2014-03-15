@@ -5,42 +5,46 @@ import com.visionarysoftwaresolutions.smacker.api.meals.MealTime
 import groovy.transform.EqualsAndHashCode
 
 @EqualsAndHashCode
-class RightNow implements MealTime {
-    Calendar now = Calendar.getInstance()
+class SomeMealTime implements MealTime {
+    Calendar cal = Calendar.getInstance()
+
+    SomeMealTime(Date target) {
+        cal.setTime(target)
+    }
 
     @Override
     String getHour() {
-        String.format('%tH', now)
+        String.format('%tH', cal)
     }
 
     @Override
     String getMinute() {
-        String.format('%tM', now)
-    }
-
-    @Override
-    String getMonth() {
-        String.format('%tB', now)
-    }
-
-    @Override
-    String getDay() {
-        String.format('%td', now)
-    }
-
-    @Override
-    String getYear() {
-        String.format('%tY', now)
-    }
-
-    @Override
-    Date asDate() {
-        now.getTime()
+        String.format('%tM', cal)
     }
 
     @Override
     boolean isOnSameDay(MealDay another) {
         year == another.year && month == another.month && day == another.day
+    }
+
+    @Override
+    String getMonth() {
+        String.format('%tB', cal)
+    }
+
+    @Override
+    String getDay() {
+        String.format('%td', cal)
+    }
+
+    @Override
+    String getYear() {
+        String.format('%tY', cal)
+    }
+
+    @Override
+    Date asDate() {
+        cal.getTime()
     }
 
     @Override

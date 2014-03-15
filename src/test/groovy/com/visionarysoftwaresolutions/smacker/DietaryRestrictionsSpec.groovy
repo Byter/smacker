@@ -39,7 +39,7 @@ class DietaryRestrictionsSpec extends spock.lang.Specification {
             Set<DietaryRestriction> restrictions = barb.dietaryRestrictions
             !restrictions.isEmpty()
         and: "her restriction list contains an allergy"
-            DietaryRestriction allergy = restrictions.getAt(0)
+            DietaryRestriction allergy = restrictions.iterator().next()
             allergy instanceof Allergy
         and: "and the allergen is oyster"
             ((Allergy) allergy).allergen == "oyster"

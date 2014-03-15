@@ -1,4 +1,4 @@
-package com.visionarysoftwaresolutions.smacker.api.diet.restrictions
+package com.visionarysoftwaresolutions.smacker.api.diet.restrictions;
 
 public abstract class GlutenFree implements Allergy {
     @Override

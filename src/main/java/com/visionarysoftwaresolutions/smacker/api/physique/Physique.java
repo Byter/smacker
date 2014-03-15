@@ -1,6 +1,6 @@
-package com.visionarysoftwaresolutions.smacker.api.physique
+package com.visionarysoftwaresolutions.smacker.api.physique;
 
-import com.visionarysoftwaresolutions.smacker.api.User
+import com.visionarysoftwaresolutions.smacker.api.User;
 
 public interface Physique {
     User belongsTo();

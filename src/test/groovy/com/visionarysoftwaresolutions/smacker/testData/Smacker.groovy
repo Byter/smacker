@@ -1,12 +1,12 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
-import com.visionarysoftwaresolutions.smacker.api.diet.Allergy
-import com.visionarysoftwaresolutions.smacker.api.diet.DietaryRestriction
+import com.visionarysoftwaresolutions.smacker.api.diet.Diet
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
 import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.physique.PhysiqueLog
-import groovy.transform.Immutable
 
 class Smacker implements User {
     String name, description
@@ -14,6 +14,7 @@ class Smacker implements User {
     MealSchedule schedule = new MemoryMealSchedule(belongsTo:this)
     PhysiqueLog bodies = new MemoryPhysiqueLog(owner:this)
     Set<DietaryRestriction> restrictions = new HashSet<DietaryRestriction>()
+    Diet diet
 	
     @Override
     void log(Meal toLog) {
@@ -84,15 +85,5 @@ class Smacker implements User {
                 severity
             }
         }
-    }
-
-    @Override
-    String getName() {
-        name
-    }
-
-    @Override
-    String getDescription() {
-        description
     }
 }

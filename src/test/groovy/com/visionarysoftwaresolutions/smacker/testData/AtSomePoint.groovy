@@ -46,4 +46,9 @@ class AtSomePoint implements MealTime {
     Date asDate() {
         cal.getTime()
     }
+
+    @Override
+    int compareTo(MealDay o) {
+        asDate().compareTo(o?.asDate())
+    }
 }

@@ -2,15 +2,16 @@ package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.NationalHeartAndBloodInstituteBMI
 import com.visionarysoftwaresolutions.smacker.api.User
-import com.visionarysoftwaresolutions.smacker.api.diet.Allergy
-import com.visionarysoftwaresolutions.smacker.api.diet.Diabetes
-import com.visionarysoftwaresolutions.smacker.api.diet.DietaryRestriction
-import com.visionarysoftwaresolutions.smacker.api.diet.GlutenFree
-import com.visionarysoftwaresolutions.smacker.api.diet.Halal
-import com.visionarysoftwaresolutions.smacker.api.diet.Kosher
-import com.visionarysoftwaresolutions.smacker.api.diet.LactoseIntolerant
-import com.visionarysoftwaresolutions.smacker.api.diet.Vegan
-import com.visionarysoftwaresolutions.smacker.api.diet.Vegetarian
+import com.visionarysoftwaresolutions.smacker.api.diet.Diet
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Diabetes
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.GlutenFree
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Halal
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Kosher
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.LactoseIntolerant
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Vegan
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Vegetarian
 import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.nutrition.analysis.TotalIntakeAnalyzer
 import com.visionarysoftwaresolutions.smacker.api.physique.BMI
@@ -114,20 +115,6 @@ class TestFixtures {
         }
     }
 
-    static DietaryRestriction createOysterAllergy() {
-        new Allergy() {
-            @Override
-            String getAllergen() {
-                return "oyster"
-            }
-
-            @Override
-            String getSeverity() {
-                return "severe"
-            }
-        }
-    }
-
     static Allergy createLactoseIntolerance() {
         new LactoseIntolerant() {
             @Override
@@ -156,5 +143,9 @@ class TestFixtures {
     static MealTime createMealTimeIn20Minutes() {
         Date thirtyMinutes = new TimeDuration(0,20,0,0) + new Date()
         new AtSomePoint(thirtyMinutes)
+    }
+
+    static Diet anythingDiet() {
+        new AnythingDiet(name:"anything", description: "I do what I want")
     }
 }

@@ -42,4 +42,9 @@ class RightNow implements MealTime {
     boolean isOnSameDay(MealDay another) {
         year == another.year && month == another.month && day == another.day
     }
+
+    @Override
+    int compareTo(MealDay o) {
+        asDate().compareTo(o?.asDate())
+    }
 }

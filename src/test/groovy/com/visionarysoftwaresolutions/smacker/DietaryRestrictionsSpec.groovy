@@ -1,8 +1,8 @@
 package com.visionarysoftwaresolutions.smacker
 
 import com.visionarysoftwaresolutions.smacker.api.User
-import com.visionarysoftwaresolutions.smacker.api.diet.Allergy
-import com.visionarysoftwaresolutions.smacker.api.diet.DietaryRestriction
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
 import com.visionarysoftwaresolutions.smacker.testData.Smacker
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
 

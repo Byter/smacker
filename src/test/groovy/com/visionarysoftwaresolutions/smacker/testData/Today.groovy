@@ -26,4 +26,9 @@ class Today implements MealDay {
     Date asDate() {
         current.getTime()
     }
+
+    @Override
+    int compareTo(MealDay o) {
+        asDate().compareTo(o?.asDate())
+    }
 }

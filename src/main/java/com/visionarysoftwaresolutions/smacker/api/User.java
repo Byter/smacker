@@ -1,15 +1,13 @@
 package com.visionarysoftwaresolutions.smacker.api;
 
 import com.visionarysoftwaresolutions.describable.Describable;
-import com.visionarysoftwaresolutions.smacker.api.diet.Diabetes;
-import com.visionarysoftwaresolutions.smacker.api.diet.DietaryRestriction;
+import com.visionarysoftwaresolutions.smacker.api.diet.Diet;
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction;
 import com.visionarysoftwaresolutions.smacker.api.meals.*;
 import com.visionarysoftwaresolutions.smacker.api.meals.MealDay;
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals;
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique;
-import groovy.lang.Closure;
 
-import java.util.List;
 import java.util.Set;
 
 public interface User extends Describable {
@@ -25,4 +23,6 @@ public interface User extends Describable {
     void addDietaryRestriction(DietaryRestriction restriction);
     Set<DietaryRestriction> getDietaryRestrictions();
     void addAllergy(String allergen, String severity);
+    void setDiet(Diet diet);
+    Diet getDiet();
 }

@@ -10,11 +10,6 @@ class MemoryPhysiqueLog implements PhysiqueLog {
     Map<MealTime, Physique> stored = [:]
 
     @Override
-    User getOwner() {
-        return owner
-    }
-
-    @Override
     void log(Physique physique) {
         MealTime now = TestFixtures.createMealTimeNow()
         stored[now] = physique
@@ -22,7 +17,15 @@ class MemoryPhysiqueLog implements PhysiqueLog {
 
     @Override
     Physique getPhysiqueFor(MealTime mealTime) {
-        stored[mealTime]
+        println mealTime
+        Physique result
+        if (stored.containsKey(mealTime)) {
+            result = stored[mealTime]
+        } else {
+            def closest = stored.min { it -> it.key.compareTo mealTime }
+            result = stored[closest.key]
+        }
+        result
     }
 
     @Override

@@ -63,7 +63,7 @@ class Smacker implements User {
 
     @Override
     void addDietaryRestriction(DietaryRestriction restriction) {
-        restrictions += restriction
+        restrictions << restriction
     }
 
     @Override
@@ -72,18 +72,7 @@ class Smacker implements User {
     }
 
     @Override
-    void addAllergy(String allergen, String severity) {
-        restrictions += new Allergy() {
-
-            @Override
-            String getAllergen() {
-                allergen
-            }
-
-            @Override
-            String getSeverity() {
-                severity
-            }
-        }
+    void addAllergy(Allergy allergy) {
+        restrictions << allergy
     }
 }

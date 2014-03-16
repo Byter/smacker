@@ -1,5 +1,7 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
+import com.visionarysoftwaresolutions.smacker.api.ContactInformation
+import com.visionarysoftwaresolutions.smacker.api.EmailAddress
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy
@@ -18,7 +20,11 @@ import com.visionarysoftwaresolutions.smacker.api.physique.BodyFat
 import com.visionarysoftwaresolutions.smacker.api.physique.Height
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.physique.Weight
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import groovy.time.TimeDuration
+
+import java.text.SimpleDateFormat
 
 class TestFixtures {
 
@@ -42,13 +48,13 @@ class TestFixtures {
         ] as MealItem
     }
 	
-	static MealTime createMealTimeTwoDaysAway() {
+	static CalendarTime createMealTimeTwoDaysAway() {
 		Date twoDaysAway = new Date() + 2
-		new SomeMealTime(twoDaysAway)
+		new SomeCalendarTime(twoDaysAway)
 	}
 
-    static MealTime createMealTimeNow() {
-        new SomeMealTime(new Date())
+    static CalendarTime createMealTimeNow() {
+        new SomeCalendarTime(new Date())
     }
 	
 	static TotalIntakeAnalyzer intakeAnalyzer() {
@@ -139,12 +145,59 @@ class TestFixtures {
         new Halal() { }
     }
 
-    static MealTime createMealTimeIn20Minutes() {
+    static CalendarTime createMealTimeIn20Minutes() {
         Date thirtyMinutes = new TimeDuration(0,20,0,0) + new Date()
-        new SomeMealTime(thirtyMinutes)
+        new SomeCalendarTime(thirtyMinutes)
     }
 
     static Diet anythingDiet() {
         new AnythingDiet(name:"anything", description: "I do what I want")
+    }
+
+    static ContactInformation createContactInfo() {
+        new ContactInformation() {
+            @Override
+            EmailAddress getEmailAddress() {
+                return new EmailAddress() {
+                    @Override
+                    String getUserName() { "visionary.software.solutions" }
+
+                    @Override
+                    String getDomain() { "gmail.com" }
+
+                    @Override
+                    String toString() { "${getUserName()}@${getDomain()}" }
+                }
+            }
+
+            @Override
+            String getFullName() { "Nick Vaidyanathan" }
+
+            @Override
+            CalendarDay getDayOfBirth() {
+                return new CalendarDay() {
+                    @Override
+                    String getMonth() { "06" }
+
+                    @Override
+                    String getDay() { "11" }
+
+                    @Override
+                    String getYear() { "1985" }
+
+                    @Override
+                    Date asDate() {
+                        Calendar cal = Calendar.getInstance()
+                        cal.set(1985, 06, 11)
+                        return cal.time
+                    }
+
+                    @Override
+                    int compareTo(CalendarDay o) {
+                        asDate().compareTo(o.asDate())
+                    }
+                }
+            }
+        }
     }
 }

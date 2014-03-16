@@ -2,6 +2,7 @@ package com.visionarysoftwaresolutions.smacker
 
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.meals.*
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
 
 class MealLoggingSpec extends spock.lang.Specification {
@@ -21,7 +22,7 @@ class MealLoggingSpec extends spock.lang.Specification {
             Meals eaten = nick.getMealsFor([
                     month:"October",
                     day: "6",
-                    year: "2013"] as MealDay)
+                    year: "2013"] as CalendarDay)
             eaten.has(dinner) == true
         and: "dinner has the 2 cans of tuna and a fiber plus bar"
             List<MealItem> dishes = dinner.getItems()

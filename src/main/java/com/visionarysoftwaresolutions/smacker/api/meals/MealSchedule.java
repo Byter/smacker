@@ -1,6 +1,8 @@
 package com.visionarysoftwaresolutions.smacker.api.meals;
 
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime;
+
 public interface MealSchedule extends MealRepository {
-	void schedule(MealTime scheduled, Meal toSchedule);
-    void addReminder(MealTime scheduled);
+	void schedule(CalendarTime scheduled, Meal toSchedule);
+    void addReminder(CalendarTime scheduled);
 }

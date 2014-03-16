@@ -1,10 +1,8 @@
 package com.visionarysoftwaresolutions.smacker
 
-import com.visionarysoftwaresolutions.smacker.api.meals.MealTime
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.User
-import com.visionarysoftwaresolutions.smacker.testData.BodyFatPercentage
-import com.visionarysoftwaresolutions.smacker.testData.ImperialHeight
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
 
 class PhysiqueSpec extends spock.lang.Specification {
@@ -25,7 +23,7 @@ class PhysiqueSpec extends spock.lang.Specification {
             User nick = TestFixtures.createNick()
         and: "he updates his physical information"
             Physique current = TestFixtures.createImperialPhysique()
-            MealTime planned = TestFixtures.createMealTimeTwoDaysAway()
+            CalendarTime planned = TestFixtures.createMealTimeTwoDaysAway()
         when: "nick logs his current physique"
             nick.logFor(current, planned)
         then: "nick has his physique correctly set"

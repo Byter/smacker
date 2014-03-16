@@ -1,14 +1,14 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
-import com.visionarysoftwaresolutions.smacker.api.meals.MealDay
-import com.visionarysoftwaresolutions.smacker.api.meals.MealTime
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import groovy.transform.EqualsAndHashCode
 
 @EqualsAndHashCode
-class SomeMealTime implements MealTime {
+class SomeCalendarTime implements CalendarTime {
     Calendar cal = Calendar.getInstance()
 
-    SomeMealTime(Date target) {
+    SomeCalendarTime(Date target) {
         cal.setTime(target)
     }
 
@@ -23,7 +23,7 @@ class SomeMealTime implements MealTime {
     }
 
     @Override
-    boolean isOnSameDay(MealDay another) {
+    boolean isOnSameDay(CalendarDay another) {
         year == another.year && month == another.month && day == another.day
     }
 
@@ -48,7 +48,7 @@ class SomeMealTime implements MealTime {
     }
 
     @Override
-    int compareTo(MealDay o) {
+    int compareTo(CalendarDay o) {
         asDate().compareTo(o?.asDate())
     }
 }

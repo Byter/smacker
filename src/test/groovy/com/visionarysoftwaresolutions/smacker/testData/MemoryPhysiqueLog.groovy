@@ -1,22 +1,22 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.User
-import com.visionarysoftwaresolutions.smacker.api.meals.MealTime
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.physique.PhysiqueLog
 
 class MemoryPhysiqueLog implements PhysiqueLog {
     User owner
-    Map<MealTime, Physique> stored = [:]
+    Map<CalendarTime, Physique> stored = [:]
 
     @Override
     void log(Physique physique) {
-        MealTime now = TestFixtures.createMealTimeNow()
+        CalendarTime now = TestFixtures.createMealTimeNow()
         stored[now] = physique
     }
 
     @Override
-    Physique getPhysiqueFor(MealTime mealTime) {
+    Physique getPhysiqueFor(CalendarTime mealTime) {
         println mealTime
         Physique result
         if (stored.containsKey(mealTime)) {
@@ -29,7 +29,7 @@ class MemoryPhysiqueLog implements PhysiqueLog {
     }
 
     @Override
-    void logFor(Physique physique, MealTime mealTime) {
+    void logFor(Physique physique, CalendarTime mealTime) {
         stored[mealTime] = physique
     }
 }

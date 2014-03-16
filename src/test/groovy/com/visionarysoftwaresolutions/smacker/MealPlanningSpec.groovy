@@ -2,6 +2,7 @@ package com.visionarysoftwaresolutions.smacker
 
 import com.visionarysoftwaresolutions.smacker.api.*
 import com.visionarysoftwaresolutions.smacker.api.meals.*
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
 
 class MealPlanningSpec extends spock.lang.Specification {
@@ -10,7 +11,7 @@ class MealPlanningSpec extends spock.lang.Specification {
 		given: "the existence of a user Nick"
 			User nick = TestFixtures.createNick()
 		and: "he plans to eat two days from now"
-			MealTime target = TestFixtures.createMealTimeTwoDaysAway()
+			CalendarTime target = TestFixtures.createMealTimeTwoDaysAway()
 		and: "meal of 2 cans of tuna and a fiber plus bar"
 			Meal dinner = TestFixtures.createDinner()
 			MealItem canOTuna = TestFixtures.canOTuna()

@@ -1,5 +1,6 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
+import com.visionarysoftwaresolutions.smacker.api.ContactInformation
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
@@ -7,6 +8,8 @@ import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.physique.PhysiqueLog
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 
 class Smacker implements User {
     String name, description
@@ -15,6 +18,7 @@ class Smacker implements User {
     PhysiqueLog bodies = new MemoryPhysiqueLog(owner:this)
     Set<DietaryRestriction> restrictions = new HashSet<DietaryRestriction>()
     Diet diet
+    ContactInformation contactInformation
 	
     @Override
     void log(Meal toLog) {
@@ -22,22 +26,22 @@ class Smacker implements User {
     }
 
     @Override
-    Meals getMealsFor(MealDay targetDate) {
+    Meals getMealsFor(CalendarDay targetDate) {
         log.getMealsFor(targetDate)
     }
 	
 	@Override
-	void schedule(MealTime time, Meal planned){
+	void schedule(CalendarTime time, Meal planned){
 		schedule.schedule(time, planned)
 	}
 	
 	@Override
-	Meals plannedMealsOn(MealDay day) {
+	Meals plannedMealsOn(CalendarDay day) {
 		schedule.getMealsFor(day)
 	}
 
     @Override
-    void createReminder(MealTime mealTime) {
+    void createReminder(CalendarTime mealTime) {
         schedule.addReminder(mealTime)
     }
 
@@ -52,12 +56,12 @@ class Smacker implements User {
     }
 
     @Override
-    void logFor(Physique physique, MealTime time) {
+    void logFor(Physique physique, CalendarTime time) {
         bodies.logFor(physique, time)
     }
 
     @Override
-    Physique getPhysiqueFor(MealTime time) {
+    Physique getPhysiqueFor(CalendarTime time) {
         bodies.getPhysiqueFor(time)
     }
 

@@ -2,10 +2,12 @@ package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.User
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 
 abstract class MemoryMealRepository implements MealRepository {
 	User belongsTo
-	Map<MealDay, Meals> consumed = [:]
+	Map<CalendarDay, Meals> consumed = [:]
 
 	@Override
 	User getOwner() {
@@ -13,15 +15,15 @@ abstract class MemoryMealRepository implements MealRepository {
 	}
 	
 	@Override
-	Meals getMealsFor(MealDay date) {
-        if (consumed.keySet().any { it -> it instanceof MealTime }) {
+	Meals getMealsFor(CalendarDay date) {
+        if (consumed.keySet().any { it -> it instanceof CalendarTime }) {
             findMealDayFor(date)
         } else {
             consumed.get(date) ?: new NoMealsEaten()
         }
 	}
 
-    Meals findMealDayFor(MealDay date) {
+    Meals findMealDayFor(CalendarDay date) {
         Meals meals = new MealsList()
         consumed.keySet().each { it ->
             if (hasMealTimeFor(it, date)) {
@@ -33,11 +35,11 @@ abstract class MemoryMealRepository implements MealRepository {
         meals
     }
 
-    boolean hasMealTimeFor(MealDay toCheck, MealDay lookingFor) {
-        toCheck instanceof MealTime && ((MealTime) toCheck).isOnSameDay(lookingFor)
+    boolean hasMealTimeFor(CalendarDay toCheck, CalendarDay lookingFor) {
+        toCheck instanceof CalendarTime && ((CalendarTime) toCheck).isOnSameDay(lookingFor)
     }
 
-    def void addAllMeals(Meals meals, MealTime it) {
+    def void addAllMeals(Meals meals, CalendarTime it) {
         Meals stored = consumed.get(it)
         stored.each { meal ->
             meals.add(meal)

@@ -200,4 +200,49 @@ class TestFixtures {
             }
         }
     }
+
+    static Allergy createOysterAllergy() {
+        new Allergy() {
+
+            @Override
+            String getAllergen() {
+                "oyster"
+            }
+
+            @Override
+            String getSeverity() {
+                "severe"
+            }
+        }
+    }
+
+    static Meal createOysterDinner() {
+        new Meal() {
+
+            @Override
+            CalendarDay eatenAt() {
+                return createMealTimeNow()
+            }
+
+            @Override
+            void addItem(MealItem eaten) {
+                throw new UnsupportedOperationException()
+            }
+
+            @Override
+            List<MealItem> getItems() {
+                throw new UnsupportedOperationException()
+            }
+
+            @Override
+            String getName() {
+                "Oysters rockefeller"
+            }
+
+            @Override
+            String getDescription() {
+                "a local favorite"
+            }
+        }
+    }
 }

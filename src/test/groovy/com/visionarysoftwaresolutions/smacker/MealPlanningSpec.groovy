@@ -31,7 +31,7 @@ class MealPlanningSpec extends spock.lang.Specification {
 			dishes == [ canOTuna, canOTuna, fiberPlusBar ]
 	}
 
-    def "warn when scheduling a meal that violates dietary restriction"() {
+    def "warn when scheduling a meal that violates vegan dietary restriction"() {
         given: "I have a user Nick"
             User nick = TestFixtures.createNick()
         and: "nick decides to go vegan"
@@ -47,4 +47,19 @@ class MealPlanningSpec extends spock.lang.Specification {
             e.dietaryRestriction == woahBro
     }
 
+    def "warn when scheduling a meal that has allergen"() {
+        given: "I have a user Barb"
+            User barb = TestFixtures.createBarb()
+        and: "barb has an allergy to oysters"
+            DietaryRestriction woahBro = TestFixtures.createOysterAllergy()
+            barb.addDietaryRestriction(woahBro)
+        when: "barb plans a meal with oysters"
+            Meal oysterDinner = TestFixtures.createOysterDinner()
+        and: "barb tries to schedule that meal"
+            barb.schedule(TestFixtures.createMealTimeNow(), oysterDinner)
+        then: "an exception is thrown because the meal contains an allergy"
+            def e = thrown(MealViolatesDietaryRestrictionException)
+            e.meal == oysterDinner
+            e.dietaryRestriction == woahBro
+    }
 }

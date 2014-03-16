@@ -34,18 +34,7 @@ class DietaryRestrictionsSpec extends spock.lang.Specification {
         given : "I have a user Barbara"
             User barb = TestFixtures.createBarb()
         when: "Barb sets that she has an allergy"
-            Allergy oyster = new Allergy() {
-
-                @Override
-                String getAllergen() {
-                    "oyster"
-                }
-
-                @Override
-                String getSeverity() {
-                    "severe"
-                }
-            }
+            Allergy oyster = TestFixtures.createOysterAllergy()
             barb.addAllergy(oyster)
         then: "barb has a dietary restriction"
             Set<DietaryRestriction> restrictions = barb.dietaryRestrictions

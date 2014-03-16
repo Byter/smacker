@@ -1,5 +1,6 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
+import com.visionarysoftwaresolutions.smacker.MealViolatesDietaryRestrictionException
 import com.visionarysoftwaresolutions.smacker.api.ContactInformation
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy
@@ -32,10 +33,21 @@ class Smacker implements User {
 	
 	@Override
 	void schedule(CalendarTime time, Meal planned){
-		schedule.schedule(time, planned)
+        validateMeal(planned)
+        schedule.schedule(time, planned)
 	}
-	
-	@Override
+
+    def validateMeal(final Meal meal) {
+        restrictions.each { it ->
+            MealValidationStrategy checker = new DietaryRestrictionValidation(it)
+            if(!checker.isValid(meal)) {
+                throw new MealViolatesDietaryRestrictionException(meal, it)
+            }
+
+        }
+    }
+
+    @Override
 	Meals plannedMealsOn(CalendarDay day) {
 		schedule.getMealsFor(day)
 	}

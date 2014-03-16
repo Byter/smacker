@@ -1,6 +1,8 @@
 package com.visionarysoftwaresolutions.smacker
 
 import com.visionarysoftwaresolutions.smacker.api.*
+import com.visionarysoftwaresolutions.smacker.api.diet.Diet
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
 import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
@@ -28,5 +30,21 @@ class MealPlanningSpec extends spock.lang.Specification {
 			List<MealItem> dishes = dinner.getItems()
 			dishes == [ canOTuna, canOTuna, fiberPlusBar ]
 	}
+
+    def "warn when scheduling a meal that violates dietary restriction"() {
+        given: "I have a user Nick"
+            User nick = TestFixtures.createNick()
+        and: "nick decides to go vegan"
+            DietaryRestriction woahBro = TestFixtures.createVegan()
+            nick.addDietaryRestriction(woahBro)
+        when: "nick plans a meal with that delicious, delicious meat"
+            Meal tuna = TestFixtures.createDinner()
+        and: "nick tries to schedule that meal"
+            nick.schedule(TestFixtures.createMealTimeNow(), tuna)
+        then: "an exception is thrown because the meal is not vegan"
+            def e = thrown(MealViolatesDietaryRestrictionException)
+            e.meal == tuna
+            e.dietaryRestriction == woahBro
+    }
 
 }

@@ -38,6 +38,8 @@ class TestFixtures {
 
     static MealItem canOTuna() {
         [
+                getName : { "2 oz can" },
+                getDescription : { "starkist tuna" }
 
         ] as MealItem
     }
@@ -231,7 +233,7 @@ class TestFixtures {
 
             @Override
             List<MealItem> getItems() {
-                throw new UnsupportedOperationException()
+                [ ]
             }
 
             @Override

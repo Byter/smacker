@@ -13,6 +13,13 @@ class AllergyValidation implements MealValidationStrategy {
 
     @Override
     boolean isValid(Meal meal) {
-        meal.description.contains(allergy.allergen) || meal.name.contains(allergy.allergen)
+        def allergen = allergy.allergen.toLowerCase()
+        def invalid = meal.description.toLowerCase().contains(allergen) ||
+        meal.name.toLowerCase().contains(allergen) ||
+        meal.items.any { item ->
+            item.name.toLowerCase().contains(allergen) ||
+            item.description.toLowerCase().contains(allergen)
+        }
+        !invalid
     }
 }

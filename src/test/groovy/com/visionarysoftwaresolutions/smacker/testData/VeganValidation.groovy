@@ -8,7 +8,12 @@ class VeganValidation implements MealValidationStrategy {
     @Override
     boolean isValid(final Meal meal) {
         !naughtyWords.any { it ->
-            meal.description.contains(it) || meal.name.contains(it)
+            meal.description.toLowerCase().contains(it) ||
+            meal.name.toLowerCase().contains(it) ||
+            meal.items.any { item ->
+                item.name.toLowerCase().contains(it) ||
+                item.description.toLowerCase().contains(it)
+            }
         }
     }
 }

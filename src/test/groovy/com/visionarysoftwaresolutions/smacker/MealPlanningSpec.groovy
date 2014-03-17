@@ -4,6 +4,7 @@ import com.visionarysoftwaresolutions.smacker.api.*
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
 import com.visionarysoftwaresolutions.smacker.api.meals.*
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
 
@@ -47,6 +48,48 @@ class MealPlanningSpec extends spock.lang.Specification {
             e.dietaryRestriction == woahBro
     }
 
+    def "warn when scheduling a meal with an item that violates vegan dietary restriction"() {
+        given: "I have a user Nick"
+            User nick = TestFixtures.createNick()
+        and: "nick decides to go vegan"
+            DietaryRestriction woahBro = TestFixtures.createVegan()
+            nick.addDietaryRestriction(woahBro)
+        when: "nick plans a meal with that delicious, delicious meat as an item"
+            Meal something = new Meal() {
+
+                @Override
+                CalendarDay eatenAt() {
+                    throw new UnsupportedOperationException()
+                }
+
+                @Override
+                void addItem(MealItem eaten) {
+                    throw new UnsupportedOperationException()
+                }
+
+                @Override
+                List<MealItem> getItems() {
+                    [ TestFixtures.canOTuna() ]
+                }
+
+                @Override
+                String getName() {
+                    "fke meal"
+                }
+
+                @Override
+                String getDescription() {
+                    "no descp"
+                }
+            }
+        and: "nick tries to schedule that meal"
+            nick.schedule(TestFixtures.createMealTimeNow(), something)
+        then: "an exception is thrown because the meal is not vegan"
+            def e = thrown(MealViolatesDietaryRestrictionException)
+            e.meal == something
+            e.dietaryRestriction == woahBro
+    }
+
     def "warn when scheduling a meal that has allergen"() {
         given: "I have a user Barb"
             User barb = TestFixtures.createBarb()
@@ -60,6 +103,48 @@ class MealPlanningSpec extends spock.lang.Specification {
         then: "an exception is thrown because the meal contains an allergy"
             def e = thrown(MealViolatesDietaryRestrictionException)
             e.meal == oysterDinner
+            e.dietaryRestriction == woahBro
+    }
+
+    def "warn when scheduling a meal with an item that violates allergens"() {
+        given: "I have a user Barb"
+            User barb = TestFixtures.createBarb()
+        and: "barb has an allergy to oysters"
+            DietaryRestriction woahBro = TestFixtures.createOysterAllergy()
+            barb.addDietaryRestriction(woahBro)
+        when: "barb plans a meal with oysters"
+            Meal something = new Meal() {
+            @Override
+            CalendarDay eatenAt() {
+                throw new UnsupportedOperationException()
+            }
+
+            @Override
+            void addItem(MealItem eaten) {
+                throw new UnsupportedOperationException()
+            }
+
+            @Override
+            List<MealItem> getItems() {
+                [ [ getName: { "oyster" } ,
+                    getDescription : { "fishy" } ] as MealItem ]
+            }
+
+            @Override
+            String getName() {
+                "fke meal"
+            }
+
+            @Override
+            String getDescription() {
+                "no descp"
+            }
+        }
+        and: "barb tries to schedule that meal"
+            barb.schedule(TestFixtures.createMealTimeNow(), something)
+        then: "an exception is thrown because the meal has an allergen"
+            def e = thrown(MealViolatesDietaryRestrictionException)
+            e.meal == something
             e.dietaryRestriction == woahBro
     }
 }

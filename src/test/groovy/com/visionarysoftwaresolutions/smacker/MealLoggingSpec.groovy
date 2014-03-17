@@ -1,6 +1,7 @@
 package com.visionarysoftwaresolutions.smacker
 
 import com.visionarysoftwaresolutions.smacker.api.User
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
 import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
@@ -27,5 +28,121 @@ class MealLoggingSpec extends spock.lang.Specification {
         and: "dinner has the 2 cans of tuna and a fiber plus bar"
             List<MealItem> dishes = dinner.getItems()
             dishes == [ canOTuna, canOTuna, fiberPlusBar ]
+    }
+
+    def "warn when logging a meal that violates vegan dietary restriction"() {
+        given: "I have a user Nick"
+            User nick = TestFixtures.createNick()
+        and: "nick decides to go vegan"
+            DietaryRestriction woahBro = TestFixtures.createVegan()
+            nick.addDietaryRestriction(woahBro)
+        when: "nick plans a meal with that delicious, delicious meat"
+            Meal tuna = TestFixtures.createDinner()
+        and: "nick tries to log that meal"
+            nick.log(tuna)
+        then: "an exception is thrown because the meal is not vegan"
+            def e = thrown(MealViolatesDietaryRestrictionException)
+            e.meal == tuna
+            e.dietaryRestriction == woahBro
+    }
+
+    def "warn when logging a meal with an item that violates vegan dietary restriction"() {
+        given: "I have a user Nick"
+            User nick = TestFixtures.createNick()
+        and: "nick decides to go vegan"
+            DietaryRestriction woahBro = TestFixtures.createVegan()
+            nick.addDietaryRestriction(woahBro)
+        when: "nick plans a meal with that delicious, delicious meat as an item"
+            Meal something = new Meal() {
+
+                @Override
+                CalendarDay eatenAt() {
+                    throw new UnsupportedOperationException()
+                }
+
+                @Override
+                void addItem(MealItem eaten) {
+                    throw new UnsupportedOperationException()
+                }
+
+                @Override
+                List<MealItem> getItems() {
+                    [ TestFixtures.canOTuna() ]
+                }
+
+                @Override
+                String getName() {
+                    "fke meal"
+                }
+
+                @Override
+                String getDescription() {
+                    "no descp"
+                }
+            }
+        and: "nick tries to log that meal"
+            nick.log(something)
+        then: "an exception is thrown because the meal is not vegan"
+            def e = thrown(MealViolatesDietaryRestrictionException)
+            e.meal == something
+            e.dietaryRestriction == woahBro
+    }
+
+    def "warn when logging a meal that has allergen"() {
+        given: "I have a user Barb"
+            User barb = TestFixtures.createBarb()
+        and: "barb has an allergy to oysters"
+            DietaryRestriction woahBro = TestFixtures.createOysterAllergy()
+            barb.addDietaryRestriction(woahBro)
+        when: "barb plans a meal with oysters"
+            Meal oysterDinner = TestFixtures.createOysterDinner()
+        and: "barb tries to log that meal"
+            barb.log(oysterDinner)
+        then: "an exception is thrown because the meal contains an allergy"
+            def e = thrown(MealViolatesDietaryRestrictionException)
+            e.meal == oysterDinner
+            e.dietaryRestriction == woahBro
+    }
+
+    def "warn when logging a meal with an item that violates allergens"() {
+        given: "I have a user Barb"
+            User barb = TestFixtures.createBarb()
+        and: "barb has an allergy to oysters"
+            DietaryRestriction woahBro = TestFixtures.createOysterAllergy()
+            barb.addDietaryRestriction(woahBro)
+        when: "barb plans a meal with oysters"
+            Meal something = new Meal() {
+                @Override
+                CalendarDay eatenAt() {
+                    throw new UnsupportedOperationException()
+                }
+
+                @Override
+                void addItem(MealItem eaten) {
+                    throw new UnsupportedOperationException()
+                }
+
+                @Override
+                List<MealItem> getItems() {
+                    [ [ getName: { "oyster" } ,
+                            getDescription : { "fishy" } ] as MealItem ]
+                }
+
+                @Override
+                String getName() {
+                    "fke meal"
+                }
+
+                @Override
+                String getDescription() {
+                    "no descp"
+                }
+            }
+        and: "barb tries to log that meal"
+            barb.log(something)
+        then: "an exception is thrown because the meal has an allergen"
+            def e = thrown(MealViolatesDietaryRestrictionException)
+            e.meal == something
+            e.dietaryRestriction == woahBro
     }
 }

@@ -1,5 +1,6 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
+import com.visionarysoftwaresolutions.smacker.MealViolatesDietException
 import com.visionarysoftwaresolutions.smacker.MealViolatesDietaryRestrictionException
 import com.visionarysoftwaresolutions.smacker.api.ContactInformation
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
@@ -18,11 +19,12 @@ class Smacker implements User {
     MealSchedule schedule = new MemoryMealSchedule(belongsTo:this)
     PhysiqueLog bodies = new MemoryPhysiqueLog(owner:this)
     Set<DietaryRestriction> restrictions = new HashSet<DietaryRestriction>()
-    Diet diet
+    Diet diet = new AnythingDiet()
     ContactInformation contactInformation
 	
     @Override
     void log(Meal toLog) {
+        validateMeal(toLog)
         log.log(toLog)
     }
 
@@ -39,11 +41,22 @@ class Smacker implements User {
 
     def validateMeal(final Meal meal) {
         restrictions.each { it ->
-            MealValidationStrategy checker = new DietaryRestrictionValidation(it)
-            if(!checker.isValid(meal)) {
-                throw new MealViolatesDietaryRestrictionException(meal, it)
-            }
+            validateDietaryRestriction(meal, it)
+        }
+        validateDiet(meal)
+    }
 
+    void validateDietaryRestriction(Meal meal, DietaryRestriction it) {
+        MealValidationStrategy checker = new DietaryRestrictionValidation(it)
+        if (!checker.isValid(meal)) {
+            throw new MealViolatesDietaryRestrictionException(meal, it)
+        }
+    }
+
+    def validateDiet(final Meal meal) {
+        MealValidationStrategy checker = new DietValidation(diet)
+        if (!checker.isValid(meal)) {
+            throw new MealViolatesDietException(meal, diet)
         }
     }
 

@@ -55,13 +55,13 @@ class MealLoggingSpec extends spock.lang.Specification {
         and: "nick decides to try Paleo"
             Diet caveman = TestFixtures.createPaleo()
             nick.setDiet(caveman)
-        when: "nick plans a meal with that delicious, delicious meat"
-            Meal tuna = TestFixtures.createDinner()
+        when: "nick plans a meal with some sweet, sweet ice cream"
+            Meal iceCream = TestFixtures.createDessert()
         and: "nick tries to log that meal"
-            nick.log(tuna)
+            nick.log(iceCream)
         then: "an exception is thrown because the meal is not paleo"
             def e = thrown(MealViolatesDietException)
-            e.meal == tuna
+            e.meal == iceCream
             e.diet == caveman
     }
 
@@ -104,7 +104,7 @@ class MealLoggingSpec extends spock.lang.Specification {
             DietaryRestriction woahBro = TestFixtures.createOysterAllergy()
             barb.addDietaryRestriction(woahBro)
         when: "barb plans a meal with oysters"
-            Meal something = TestFixtures.createOsysterMeal()
+            Meal something = TestFixtures.createOysterMeal()
         and: "barb tries to log that meal"
             barb.log(something)
         then: "an exception is thrown because the meal has an allergen"

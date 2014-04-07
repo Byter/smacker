@@ -12,6 +12,21 @@ class PaleoValidation implements MealValidationStrategy {
 
     @Override
     boolean isValid(Meal meal) {
-        return false
+        return isNotDairy(meal) && isNotGrain(meal) && isNotLegume(meal)
+    }
+
+    boolean isNotDairy(Meal meal) {
+        def name = meal.name
+        name.contains("milk") || name.contains("ice cream")
+    }
+
+    boolean isNotGrain(Meal meal) {
+        def name = meal.name
+        name.contains("bread") || name.contains("wheat")
+    }
+
+    boolean isNotLegume(Meal meal) {
+        def name = meal.name
+        name.contains("bean")
     }
 }

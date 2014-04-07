@@ -268,4 +268,34 @@ class TestFixtures {
     static Diet createPaleo() {
         return new Paleo()
     }
+
+    static Meal createDessert() {
+        return new Meal() {
+
+            @Override
+            CalendarDay eatenAt() {
+                return null
+            }
+
+            @Override
+            void addItem(MealItem eaten) {
+
+            }
+
+            @Override
+            List<MealItem> getItems() {
+                return null
+            }
+
+            @Override
+            String getName() {
+                return "Vanilla Ice cream"
+            }
+
+            @Override
+            String getDescription() {
+                return "Sweet vanilla ice creams"
+            }
+        }
+    }
 }

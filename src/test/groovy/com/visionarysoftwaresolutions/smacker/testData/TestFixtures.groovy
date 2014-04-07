@@ -247,4 +247,38 @@ class TestFixtures {
             }
         }
     }
+
+    static Meal createOysterMeal() {
+        new Meal() {
+            @Override
+            CalendarDay eatenAt() {
+                throw new UnsupportedOperationException()
+            }
+
+            @Override
+            void addItem(MealItem eaten) {
+                throw new UnsupportedOperationException()
+            }
+
+            @Override
+            List<MealItem> getItems() {
+                [ [ getName: { "oyster" } ,
+                    getDescription : { "fishy" } ] as MealItem ]
+            }
+
+            @Override
+            String getName() {
+                "fke meal"
+            }
+
+            @Override
+            String getDescription() {
+                "no descp"
+            }
+        }
+    }
+
+    static Diet createPaleo() {
+        return new Paleo()
+    }
 }

@@ -1,8 +1,11 @@
 package com.visionarysoftwaresolutions.smacker
 
 import com.visionarysoftwaresolutions.smacker.api.User
+import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
-import com.visionarysoftwaresolutions.smacker.api.meals.*
+import com.visionarysoftwaresolutions.smacker.api.meals.Meal
+import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
+import com.visionarysoftwaresolutions.smacker.api.meals.Meals
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
 
@@ -44,6 +47,22 @@ class MealLoggingSpec extends spock.lang.Specification {
             def e = thrown(MealViolatesDietaryRestrictionException)
             e.meal == tuna
             e.dietaryRestriction == woahBro
+    }
+
+    def "warn when logging a meal that violates diet"() {
+        given: "I have a user Nick"
+            User nick = TestFixtures.createNick()
+        and: "nick decides to try Paleo"
+            Diet caveman = TestFixtures.createPaleo()
+            nick.setDiet(caveman)
+        when: "nick plans a meal with that delicious, delicious meat"
+            Meal tuna = TestFixtures.createDinner()
+        and: "nick tries to log that meal"
+            nick.log(tuna)
+        then: "an exception is thrown because the meal is not paleo"
+            def e = thrown(MealViolatesDietException)
+            e.meal == tuna
+            e.diet == caveman
     }
 
     def "warn when logging a meal with an item that violates vegan dietary restriction"() {
@@ -111,33 +130,7 @@ class MealLoggingSpec extends spock.lang.Specification {
             DietaryRestriction woahBro = TestFixtures.createOysterAllergy()
             barb.addDietaryRestriction(woahBro)
         when: "barb plans a meal with oysters"
-            Meal something = new Meal() {
-                @Override
-                CalendarDay eatenAt() {
-                    throw new UnsupportedOperationException()
-                }
-
-                @Override
-                void addItem(MealItem eaten) {
-                    throw new UnsupportedOperationException()
-                }
-
-                @Override
-                List<MealItem> getItems() {
-                    [ [ getName: { "oyster" } ,
-                            getDescription : { "fishy" } ] as MealItem ]
-                }
-
-                @Override
-                String getName() {
-                    "fke meal"
-                }
-
-                @Override
-                String getDescription() {
-                    "no descp"
-                }
-            }
+            Meal something = TestFixtures.createOsysterMeal()
         and: "barb tries to log that meal"
             barb.log(something)
         then: "an exception is thrown because the meal has an allergen"

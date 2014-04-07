@@ -55,33 +55,7 @@ class MealPlanningSpec extends spock.lang.Specification {
             DietaryRestriction woahBro = TestFixtures.createVegan()
             nick.addDietaryRestriction(woahBro)
         when: "nick plans a meal with that delicious, delicious meat as an item"
-            Meal something = new Meal() {
-
-                @Override
-                CalendarDay eatenAt() {
-                    throw new UnsupportedOperationException()
-                }
-
-                @Override
-                void addItem(MealItem eaten) {
-                    throw new UnsupportedOperationException()
-                }
-
-                @Override
-                List<MealItem> getItems() {
-                    [ TestFixtures.canOTuna() ]
-                }
-
-                @Override
-                String getName() {
-                    "fke meal"
-                }
-
-                @Override
-                String getDescription() {
-                    "no descp"
-                }
-            }
+            Meal something = TestFixtures.createDinner()
         and: "nick tries to schedule that meal"
             nick.schedule(TestFixtures.createMealTimeNow(), something)
         then: "an exception is thrown because the meal is not vegan"
@@ -113,33 +87,7 @@ class MealPlanningSpec extends spock.lang.Specification {
             DietaryRestriction woahBro = TestFixtures.createOysterAllergy()
             barb.addDietaryRestriction(woahBro)
         when: "barb plans a meal with oysters"
-            Meal something = new Meal() {
-            @Override
-            CalendarDay eatenAt() {
-                throw new UnsupportedOperationException()
-            }
-
-            @Override
-            void addItem(MealItem eaten) {
-                throw new UnsupportedOperationException()
-            }
-
-            @Override
-            List<MealItem> getItems() {
-                [ [ getName: { "oyster" } ,
-                    getDescription : { "fishy" } ] as MealItem ]
-            }
-
-            @Override
-            String getName() {
-                "fke meal"
-            }
-
-            @Override
-            String getDescription() {
-                "no descp"
-            }
-        }
+            Meal something = TestFixtures.createOysterMeal()
         and: "barb tries to schedule that meal"
             barb.schedule(TestFixtures.createMealTimeNow(), something)
         then: "an exception is thrown because the meal has an allergen"

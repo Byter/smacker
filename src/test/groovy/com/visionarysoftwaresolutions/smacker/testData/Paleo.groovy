@@ -17,11 +17,11 @@ class Paleo implements Diet {
 
     @Override
     String getName() {
-        return null
+        return "Paleo"
     }
 
     @Override
     String getDescription() {
-        return null
+        return "The growingly popular Paleo diet"
     }
 }

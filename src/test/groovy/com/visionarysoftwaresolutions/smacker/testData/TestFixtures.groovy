@@ -7,6 +7,7 @@ import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.*
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
+import com.visionarysoftwaresolutions.smacker.api.meals.MealPlanningStrategy
 import com.visionarysoftwaresolutions.smacker.api.nutrition.analysis.TotalIntakeAnalyzer
 import com.visionarysoftwaresolutions.smacker.api.physique.*
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
@@ -297,5 +298,9 @@ class TestFixtures {
                 return "Sweet vanilla ice creams"
             }
         }
+    }
+
+    static MealPlanningStrategy createMealPlanningStrategy() {
+        new BasicMealPlanningStrategy()
     }
 }

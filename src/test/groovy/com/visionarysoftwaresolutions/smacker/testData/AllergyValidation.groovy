@@ -15,11 +15,11 @@ class AllergyValidation implements MealValidationStrategy {
     boolean isValid(Meal meal) {
         def allergen = allergy.allergen.toLowerCase()
         def invalid = meal.description.toLowerCase().contains(allergen) ||
-        meal.name.toLowerCase().contains(allergen) ||
-        meal.items.any { item ->
-            item.name.toLowerCase().contains(allergen) ||
-            item.description.toLowerCase().contains(allergen)
-        }
+                meal.name.toLowerCase().contains(allergen) ||
+                meal.items.any { item ->
+                    item.name.toLowerCase().contains(allergen) ||
+                            item.description.toLowerCase().contains(allergen)
+                }
         !invalid
     }
 }

@@ -1,9 +1,9 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.User
-import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.physique.PhysiqueLog
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 
 class MemoryPhysiqueLog implements PhysiqueLog {
     User owner

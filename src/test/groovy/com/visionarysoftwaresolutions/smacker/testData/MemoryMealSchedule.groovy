@@ -1,12 +1,15 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
-import com.visionarysoftwaresolutions.smacker.api.meals.*
+import com.visionarysoftwaresolutions.smacker.api.meals.Meal
+import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
+import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
+import com.visionarysoftwaresolutions.smacker.api.meals.Meals
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 
 class MemoryMealSchedule extends MemoryMealRepository implements MealSchedule {
 
-	public void schedule(CalendarTime scheduled, Meal toSchedule) {
+    public void schedule(CalendarTime scheduled, Meal toSchedule) {
         Meals newlyEaten = new MealsList()
         newlyEaten.add(toSchedule)
         consumed.put(scheduled, newlyEaten)

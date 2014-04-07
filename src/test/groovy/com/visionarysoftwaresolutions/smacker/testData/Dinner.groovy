@@ -1,14 +1,15 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
-import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 
 class Dinner implements Meal {
     List<MealItem> items = []
+
     @Override
     CalendarDay eatenAt() {
-        [ year:"2013", month:"October", day:"6"] as CalendarDay
+        [year: "2013", month: "October", day: "6"] as CalendarDay
     }
 
     @Override

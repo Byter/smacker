@@ -1,11 +1,11 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.meals.MealAssistant
-import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.api.meals.MealNotification
 import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
-import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
+import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import groovy.time.Duration
 import groovy.time.TimeDuration
 

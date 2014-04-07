@@ -72,33 +72,7 @@ class MealLoggingSpec extends spock.lang.Specification {
             DietaryRestriction woahBro = TestFixtures.createVegan()
             nick.addDietaryRestriction(woahBro)
         when: "nick plans a meal with that delicious, delicious meat as an item"
-            Meal something = new Meal() {
-
-                @Override
-                CalendarDay eatenAt() {
-                    throw new UnsupportedOperationException()
-                }
-
-                @Override
-                void addItem(MealItem eaten) {
-                    throw new UnsupportedOperationException()
-                }
-
-                @Override
-                List<MealItem> getItems() {
-                    [ TestFixtures.canOTuna() ]
-                }
-
-                @Override
-                String getName() {
-                    "fke meal"
-                }
-
-                @Override
-                String getDescription() {
-                    "no descp"
-                }
-            }
+            Meal something = TestFixtures.createDinner()
         and: "nick tries to log that meal"
             nick.log(something)
         then: "an exception is thrown because the meal is not vegan"

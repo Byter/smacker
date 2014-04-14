@@ -69,8 +69,11 @@ class UniqueDietaryRestrictions implements DietaryRestrictions {
 
     void validateDietaryRestriction(Meal meal, DietaryRestriction it) {
         MealValidationStrategy checker = new DietaryRestrictionValidation(it)
-        if (!checker.isValid(meal)) {
+
+        def valid = checker.isValid(meal)
+        if (!valid) {
             throw new MealViolatesDietaryRestrictionException(meal, it)
         }
+        valid
     }
 }

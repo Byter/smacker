@@ -41,17 +41,7 @@ class Smacker implements User {
     }
 
     def validateMeal(final Meal meal) {
-        restrictions.meetsRestrictions(meal)
-        validateDiet(meal)
-    }
-
-
-
-    def validateDiet(final Meal meal) {
-        MealValidationStrategy checker = new DietValidation(diet)
-        if (!checker.isValid(meal)) {
-            throw new MealViolatesDietException(meal, diet)
-        }
+        diet.isAcceptable(meal) && restrictions.meetsRestrictions(meal)
     }
 
     @Override

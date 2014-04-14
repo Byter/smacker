@@ -4,6 +4,7 @@ import com.visionarysoftwaresolutions.describable.Describable;
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet;
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy;
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction;
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestrictions;
 import com.visionarysoftwaresolutions.smacker.api.meals.*;
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay;
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals;
@@ -23,7 +24,7 @@ public interface User extends Describable {
     void logFor(Physique physique, CalendarTime time);
     Physique getPhysiqueFor(CalendarTime time);
     void addDietaryRestriction(DietaryRestriction restriction);
-    Set<DietaryRestriction> getDietaryRestrictions();
+    DietaryRestrictions getDietaryRestrictions();
     void addAllergy(Allergy allergy);
     void setDiet(Diet diet);
     Diet getDiet();

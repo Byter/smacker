@@ -3,6 +3,8 @@ package com.visionarysoftwaresolutions.smacker
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestrictions
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.GlutenFree
 import com.visionarysoftwaresolutions.smacker.testData.Smacker
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
 
@@ -11,7 +13,7 @@ class DietaryRestrictionsSpec extends spock.lang.Specification {
         given: "I have a user nick"
             User nick = TestFixtures.createNick()
         when: "I ask for Nick's dietary restrictions"
-            Set<DietaryRestriction> restrictions = nick.dietaryRestrictions
+            DietaryRestrictions restrictions = nick.dietaryRestrictions
         then: "there are no restrictions"
             restrictions.isEmpty()
     }
@@ -24,7 +26,7 @@ class DietaryRestrictionsSpec extends spock.lang.Specification {
         when: "Barb sets that she is diabetic"
             barb.addDietaryRestriction(diabetes)
         then: "barb has a dietary restriction"
-            Set<DietaryRestriction> restrictions = barb.dietaryRestrictions
+            DietaryRestrictions restrictions = barb.dietaryRestrictions
             !restrictions.isEmpty()
         and: "her restriction list contains diabetes"
             restrictions.contains(diabetes)
@@ -37,31 +39,28 @@ class DietaryRestrictionsSpec extends spock.lang.Specification {
             Allergy oyster = TestFixtures.createOysterAllergy()
             barb.addAllergy(oyster)
         then: "barb has a dietary restriction"
-            Set<DietaryRestriction> restrictions = barb.dietaryRestrictions
+            DietaryRestrictions restrictions = barb.dietaryRestrictions
             !restrictions.isEmpty()
         and: "her restriction list contains an allergy"
-            DietaryRestriction allergy = restrictions.iterator().next()
-            allergy instanceof Allergy
+            restrictions.hasAllergies()
         and: "and the allergen is oyster"
-            ((Allergy) allergy).allergen == "oyster"
-        and: "and the severity is severe"
-            ((Allergy) allergy).severity == "severe"
+            restrictions.isAllergicTo(oyster.allergen)
     }
 
     def "user can add gluten free"() {
         given : "I have a user Aaron"
             User aaron = new Smacker(name:"Aaron", description:"bro")
         and: "a dietary restriction of GlutenFree"
-            DietaryRestriction gluten = TestFixtures.createGlutenFree()
+            GlutenFree gluten = TestFixtures.createGlutenFree()
         when: "aaron sets that he is gluten free"
             aaron.addDietaryRestriction(gluten)
         then: "aaron has a dietary restriction"
-            Set<DietaryRestriction> restrictions = aaron.dietaryRestrictions
+            DietaryRestrictions restrictions = aaron.dietaryRestrictions
             !restrictions.isEmpty()
         and: "the restriction list contains gluten"
-            restrictions.contains(gluten)
+            restrictions.hasAllergies()
         and: "and the allergen is gluten"
-            ((Allergy) gluten).allergen == "gluten"
+            restrictions.isAllergicTo(gluten.allergen)
     }
 
     def "user can add lactose intolerant"() {
@@ -72,12 +71,12 @@ class DietaryRestrictionsSpec extends spock.lang.Specification {
         when: "thor sets that he is lactose intolerant"
             thor.addDietaryRestriction(lactose)
         then: "thor has a dietary restriction"
-            Set<DietaryRestriction> restrictions = thor.dietaryRestrictions
+            DietaryRestrictions restrictions = thor.dietaryRestrictions
             !restrictions.isEmpty()
         and: "the restriction list contains lactose"
-            restrictions.contains(lactose)
+            restrictions.hasAllergies()
         and: "and the allergen is lactose"
-            ((Allergy) lactose).allergen == "lactose"
+            restrictions.isAllergicTo(lactose.allergen)
     }
 
     def "user can add vegetarian"() {
@@ -88,10 +87,10 @@ class DietaryRestrictionsSpec extends spock.lang.Specification {
         when: "ankit sets that he is vegetarian"
             ankit.addDietaryRestriction(vegetarian)
         then: "ankit has a dietary restriction"
-            Set<DietaryRestriction> restrictions = ankit.dietaryRestrictions
+            DietaryRestrictions restrictions = ankit.dietaryRestrictions
             !restrictions.isEmpty()
         and: "the restriction list contains vegetarian"
-            restrictions.contains(vegetarian)
+            restrictions.isVegetarian()
     }
 
     def "user can add vegan"() {
@@ -102,10 +101,10 @@ class DietaryRestrictionsSpec extends spock.lang.Specification {
         when: "joseph sets that he is vegan"
             joseph.addDietaryRestriction(vegan)
         then: "joseph has a dietary restriction"
-            Set<DietaryRestriction> restrictions = joseph.dietaryRestrictions
+            DietaryRestrictions restrictions = joseph.dietaryRestrictions
             !restrictions.isEmpty()
         and: "the restriction list contains vegan"
-            restrictions.contains(vegan)
+            restrictions.isVegan()
     }
 
     def "user can add kosher"() {
@@ -116,10 +115,10 @@ class DietaryRestrictionsSpec extends spock.lang.Specification {
         when: "daniel sets that he is kosher"
             daniel.addDietaryRestriction(kosher)
         then: "daniel has a dietary restriction"
-            Set<DietaryRestriction> restrictions = daniel.dietaryRestrictions
+            DietaryRestrictions restrictions = daniel.dietaryRestrictions
             !restrictions.isEmpty()
         and: "the restriction list contains kosher"
-            restrictions.contains(kosher)
+            restrictions.isKosher()
     }
 
     def "user can add halal"() {
@@ -130,9 +129,9 @@ class DietaryRestrictionsSpec extends spock.lang.Specification {
         when: "tan sets that he is halal"
             tan.addDietaryRestriction(halal)
         then: "tan has a dietary restriction"
-            Set<DietaryRestriction> restrictions = tan.dietaryRestrictions
+            DietaryRestrictions restrictions = tan.dietaryRestrictions
             !restrictions.isEmpty()
         and: "the restriction list contains halal"
-            restrictions.contains(halal)
+            restrictions.isHalal()
     }
 }

@@ -7,6 +7,7 @@ import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestrictions
 import com.visionarysoftwaresolutions.smacker.api.meals.*
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.physique.PhysiqueLog
@@ -18,7 +19,7 @@ class Smacker implements User {
     MealLog log = new MemoryMealLog(belongsTo: this)
     MealSchedule schedule = new MemoryMealSchedule(belongsTo: this)
     PhysiqueLog bodies = new MemoryPhysiqueLog(owner: this)
-    Set<DietaryRestriction> restrictions = new HashSet<DietaryRestriction>()
+    DietaryRestrictions restrictions = new UniqueDietaryRestrictions()
     Diet diet = new AnythingDiet()
     ContactInformation contactInformation
 
@@ -40,18 +41,11 @@ class Smacker implements User {
     }
 
     def validateMeal(final Meal meal) {
-        restrictions.each { it ->
-            validateDietaryRestriction(meal, it)
-        }
+        restrictions.meetsRestrictions(meal)
         validateDiet(meal)
     }
 
-    void validateDietaryRestriction(Meal meal, DietaryRestriction it) {
-        MealValidationStrategy checker = new DietaryRestrictionValidation(it)
-        if (!checker.isValid(meal)) {
-            throw new MealViolatesDietaryRestrictionException(meal, it)
-        }
-    }
+
 
     def validateDiet(final Meal meal) {
         MealValidationStrategy checker = new DietValidation(diet)
@@ -92,16 +86,16 @@ class Smacker implements User {
 
     @Override
     void addDietaryRestriction(DietaryRestriction restriction) {
-        restrictions << restriction
+        restrictions.add(restriction)
     }
 
     @Override
-    Set<DietaryRestriction> getDietaryRestrictions() {
-        Collections.unmodifiableCollection(restrictions)
+    DietaryRestrictions getDietaryRestrictions() {
+        restrictions
     }
 
     @Override
     void addAllergy(Allergy allergy) {
-        restrictions << allergy
+        restrictions.add(allergy)
     }
 }

@@ -20,7 +20,7 @@ class MemoryMealSchedule extends MemoryMealRepository implements MealSchedule {
     void addReminder(CalendarTime scheduled) {
         Meals toEat = new MealsList()
         Meal aMeal = new Meal() {
-
+            MealItems items = new MealItemsList()
             @Override
             CalendarDay eatenAt() {
                 scheduled
@@ -28,22 +28,22 @@ class MemoryMealSchedule extends MemoryMealRepository implements MealSchedule {
 
             @Override
             void addItem(MealItem eaten) {
-
+                items.add(eaten)
             }
 
             @Override
             MealItems getItems() {
-                return null
+                items
             }
 
             @Override
             String getName() {
-                return null
+                "planned meal"
             }
 
             @Override
             String getDescription() {
-                return null
+                "meal planned @ ${eatenAt()}"
             }
         }
         toEat.add(aMeal)

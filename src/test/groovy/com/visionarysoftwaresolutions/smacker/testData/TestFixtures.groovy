@@ -9,10 +9,19 @@ import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItems
 import com.visionarysoftwaresolutions.smacker.api.meals.MealPlanningStrategy
+import com.visionarysoftwaresolutions.smacker.api.nutrition.Calories
+import com.visionarysoftwaresolutions.smacker.api.nutrition.Carbohydrates
+import com.visionarysoftwaresolutions.smacker.api.nutrition.Cholesterol
+import com.visionarysoftwaresolutions.smacker.api.nutrition.Fat
+import com.visionarysoftwaresolutions.smacker.api.nutrition.NutritionalInformation
+import com.visionarysoftwaresolutions.smacker.api.nutrition.Protein
+import com.visionarysoftwaresolutions.smacker.api.nutrition.Sodium
+import com.visionarysoftwaresolutions.smacker.api.nutrition.Vitamins
 import com.visionarysoftwaresolutions.smacker.api.nutrition.analysis.TotalIntakeAnalyzer
 import com.visionarysoftwaresolutions.smacker.api.physique.*
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
+import com.visionarysoftwaresolutions.smacker.api.units.Grams
 import groovy.time.TimeDuration
 
 class TestFixtures {
@@ -26,17 +35,64 @@ class TestFixtures {
     }
 
     static MealItem canOTuna() {
-        [
-                getName       : { "2 oz can" },
-                getDescription: { "starkist tuna" }
+        new BasicMealItem(name:"2 oz can",
+                description: "starkist tuna",
+                nut: new NutritionalInformation() {
+                    @Override
+                    Calories getCalories() {
+                        return null
+                    }
 
-        ] as MealItem
+                    @Override
+                    Fat getFat() {
+                        return null
+                    }
+
+                    @Override
+                    Cholesterol getCholesterol() {
+                        return null
+                    }
+
+                    @Override
+                    Carbohydrates getCarbohydrates() {
+                        return new Carbohydrates() {
+                            @Override
+                            Grams getTotal() {
+                                getFiber() + getSugar()
+                            }
+
+                            @Override
+                            Grams getFiber() {
+                                new Gram()
+                            }
+
+                            @Override
+                            Grams getSugar() {
+                                new Gram()
+                            }
+                        }
+                    }
+
+                    @Override
+                    Sodium getSodium() {
+                        return null
+                    }
+
+                    @Override
+                    Protein getProtein() {
+                        return null
+                    }
+
+                    @Override
+                    Vitamins getVitamins() {
+                        return null
+                    }
+                }
+        )
     }
 
     static MealItem fiberPlusBar() {
-        [
-
-        ] as MealItem
+        new BasicMealItem(name:"fiber plus bar", description:"chocolate chip")
     }
 
     static CalendarTime createMealTimeTwoDaysAway() {
@@ -273,33 +329,7 @@ class TestFixtures {
     }
 
     static Meal createDessert() {
-        return new Meal() {
-
-            @Override
-            CalendarDay eatenAt() {
-                return null
-            }
-
-            @Override
-            void addItem(MealItem eaten) {
-
-            }
-
-            @Override
-            MealItems getItems() {
-                return null
-            }
-
-            @Override
-            String getName() {
-                return "Vanilla Ice cream"
-            }
-
-            @Override
-            String getDescription() {
-                return "Sweet vanilla ice creams"
-            }
-        }
+        return new Dessert()
     }
 
     static MealPlanningStrategy createMealPlanningStrategy() {

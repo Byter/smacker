@@ -3,6 +3,7 @@ package com.visionarysoftwaresolutions.smacker.testData
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
+import com.visionarysoftwaresolutions.smacker.api.meals.MealItems
 import com.visionarysoftwaresolutions.smacker.api.meals.MealPlanningStrategy
 import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
@@ -39,7 +40,7 @@ class BasicMealPlanningStrategy implements MealPlanningStrategy {
 
     private Meal steakBreakfast(calendarTime) {
         new Meal() {
-            def items = []
+            def items = new MealItemsList()
 
             @Override
             CalendarDay eatenAt() {
@@ -52,8 +53,8 @@ class BasicMealPlanningStrategy implements MealPlanningStrategy {
             }
 
             @Override
-            List<MealItem> getItems() {
-                return items
+            MealItems getItems() {
+                items
             }
 
             @Override

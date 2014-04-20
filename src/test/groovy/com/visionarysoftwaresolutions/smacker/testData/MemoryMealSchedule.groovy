@@ -2,6 +2,7 @@ package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
+import com.visionarysoftwaresolutions.smacker.api.meals.MealItems
 import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
@@ -31,7 +32,7 @@ class MemoryMealSchedule extends MemoryMealRepository implements MealSchedule {
             }
 
             @Override
-            List<MealItem> getItems() {
+            MealItems getItems() {
                 return null
             }
 

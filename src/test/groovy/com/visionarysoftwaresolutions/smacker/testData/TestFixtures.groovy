@@ -7,6 +7,7 @@ import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.*
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
+import com.visionarysoftwaresolutions.smacker.api.meals.MealItems
 import com.visionarysoftwaresolutions.smacker.api.meals.MealPlanningStrategy
 import com.visionarysoftwaresolutions.smacker.api.nutrition.analysis.TotalIntakeAnalyzer
 import com.visionarysoftwaresolutions.smacker.api.physique.*
@@ -220,8 +221,8 @@ class TestFixtures {
             }
 
             @Override
-            List<MealItem> getItems() {
-                []
+            MealItems getItems() {
+                null
             }
 
             @Override
@@ -237,6 +238,8 @@ class TestFixtures {
     }
 
     static Meal createOysterMeal() {
+        MealItems items = new MealItemsList()
+        items.add([getName       : { "oyster" }, getDescription: { "fishy" }] as MealItem)
         new Meal() {
             @Override
             CalendarDay eatenAt() {
@@ -249,9 +252,8 @@ class TestFixtures {
             }
 
             @Override
-            List<MealItem> getItems() {
-                [[getName       : { "oyster" },
-                  getDescription: { "fishy" }] as MealItem]
+            MealItems getItems() {
+                items
             }
 
             @Override
@@ -284,7 +286,7 @@ class TestFixtures {
             }
 
             @Override
-            List<MealItem> getItems() {
+            MealItems getItems() {
                 return null
             }
 

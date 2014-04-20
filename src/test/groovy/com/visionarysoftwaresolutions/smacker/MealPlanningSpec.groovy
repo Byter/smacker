@@ -28,8 +28,8 @@ class MealPlanningSpec extends spock.lang.Specification {
 			Meals eaten = nick.plannedMealsOn(target)
 			eaten.has(dinner) == true
 		and: "dinner has the 2 cans of tuna and a fiber plus bar"
-			List<MealItem> dishes = dinner.getItems()
-			dishes == [ canOTuna, canOTuna, fiberPlusBar ]
+			MealItems dishes = dinner.getItems()
+			dishes.collect() == [ canOTuna, canOTuna, fiberPlusBar ]
 	}
 
     def "warn when scheduling a meal that violates vegan dietary restriction"() {

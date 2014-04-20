@@ -2,10 +2,11 @@ package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
+import com.visionarysoftwaresolutions.smacker.api.meals.MealItems
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 
 class Dinner implements Meal {
-    List<MealItem> items = []
+    MealItems items = new MealItemsList()
 
     @Override
     CalendarDay eatenAt() {
@@ -14,12 +15,12 @@ class Dinner implements Meal {
 
     @Override
     void addItem(MealItem eaten) {
-        items += eaten
+        items.add(eaten)
     }
 
     @Override
-    List<MealItem> getItems() {
-        Collections.unmodifiableList(items)
+    MealItems getItems() {
+        items
     }
 
     @Override

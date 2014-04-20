@@ -5,6 +5,7 @@ import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
+import com.visionarysoftwaresolutions.smacker.api.meals.MealItems
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
@@ -29,8 +30,8 @@ class MealLoggingSpec extends spock.lang.Specification {
                     year: "2013"] as CalendarDay)
             eaten.has(dinner) == true
         and: "dinner has the 2 cans of tuna and a fiber plus bar"
-            List<MealItem> dishes = dinner.getItems()
-            dishes == [ canOTuna, canOTuna, fiberPlusBar ]
+            MealItems dishes = dinner.getItems()
+            dishes.collect() == [ canOTuna, canOTuna, fiberPlusBar ]
     }
 
     def "warn when logging a meal that violates vegan dietary restriction"() {

@@ -24,7 +24,6 @@ class Smacker implements User {
 
     @Override
     void log(Meal toLog) {
-        validateMeal(toLog)
         log.log(toLog)
     }
 
@@ -35,12 +34,8 @@ class Smacker implements User {
 
     @Override
     void schedule(CalendarTime time, Meal planned) {
-        validateMeal(planned)
+        shouldEat(planned)
         schedule.schedule(time, planned)
-    }
-
-    def validateMeal(final Meal meal) {
-        diet.isAcceptable(meal) && restrictions.meetsRestrictions(meal)
     }
 
     @Override
@@ -86,5 +81,10 @@ class Smacker implements User {
     @Override
     void addAllergy(Allergy allergy) {
         restrictions.add(allergy)
+    }
+
+    @Override
+    boolean shouldEat(Meal toEat) {
+        diet.isAcceptable(toEat) && restrictions.meetsRestrictions(toEat)
     }
 }

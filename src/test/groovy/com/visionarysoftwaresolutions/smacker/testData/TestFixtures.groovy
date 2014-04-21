@@ -155,7 +155,7 @@ class TestFixtures {
     }
 
     static Diabetes createDiabetes() {
-        new Diabetes() {}
+        new Type2Diabetes()
     }
 
     static DietaryRestriction createGlutenFree() {

@@ -1,7 +1,7 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.meals.MealAssistant
-import com.visionarysoftwaresolutions.smacker.api.meals.MealNotification
+import com.visionarysoftwaresolutions.smacker.api.events.MealNotification
 import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay

@@ -5,13 +5,12 @@ import com.visionarysoftwaresolutions.smacker.api.diet.Diet;
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy;
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction;
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestrictions;
+import com.visionarysoftwaresolutions.smacker.api.events.MealNotification;
 import com.visionarysoftwaresolutions.smacker.api.meals.*;
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay;
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals;
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique;
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime;
-
-import java.util.Set;
 
 public interface User extends Describable {
     void log(Meal toLog);

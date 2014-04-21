@@ -5,6 +5,7 @@ import com.visionarysoftwaresolutions.smacker.api.EmailAddress
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.*
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.Diabetes
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItems

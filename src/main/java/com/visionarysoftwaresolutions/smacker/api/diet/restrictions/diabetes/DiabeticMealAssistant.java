@@ -1,4 +1,4 @@
-package com.visionarysoftwaresolutions.smacker.api.diet.restrictions;
+package com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes;
 
 import com.visionarysoftwaresolutions.smacker.api.meals.MealAssistant;
 

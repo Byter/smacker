@@ -1,9 +1,10 @@
 package com.visionarysoftwaresolutions.smacker
 
 import com.visionarysoftwaresolutions.smacker.api.User
-import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.BloodSugarLevel
-import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Diabetes
-import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DiabeticMealAssistant
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.BloodSugarLevel
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.Diabetes
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.DiabeticMealAssistant
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.Insulin
 import com.visionarysoftwaresolutions.smacker.api.events.InsulinDosageRecommendation
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals
@@ -48,7 +49,24 @@ class DiabeticSpec extends spock.lang.Specification {
 
     def "advised of units of insulin to take after logging meal"() {
         given: "barb takes Novalog"
-            diabetes.addInsulin("Novalog")
+            Insulin novalog = new Insulin() {
+
+                @Override
+                boolean isFastActing() {
+                    true
+                }
+
+                @Override
+                String getName() {
+                    "Novalog"
+                }
+
+                @Override
+                String getDescription() {
+                    "Insulin aspart (NovoLog)"
+                }
+            }
+            diabetes.add(novalog)
         and: "she logs her pre-meal blood sugar level"
             diabetes.log([ "getValue" : 145.0] as BloodSugarLevel)
         and: "a meal assistant is created to remind barb"

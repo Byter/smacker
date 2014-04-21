@@ -1,7 +1,7 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Allergy
-import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Diabetes
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.Diabetes
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.Vegan
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal

@@ -1,8 +1,6 @@
 package com.visionarysoftwaresolutions.smacker
 
 import com.visionarysoftwaresolutions.smacker.api.User
-import com.visionarysoftwaresolutions.smacker.api.diet.Diet
-import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestriction
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItems

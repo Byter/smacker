@@ -30,4 +30,5 @@ public interface User extends Describable {
     void setContactInformation(ContactInformation info);
     ContactInformation getContactInformation();
     boolean shouldEat(Meal toEat);
+    void addAssistant(MealAssistant assistant);
 }

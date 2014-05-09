@@ -6,6 +6,7 @@ import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.*
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.Diabetes
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.Insulin
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItems
@@ -335,5 +336,25 @@ class TestFixtures {
 
     static MealPlanningStrategy createMealPlanningStrategy() {
         new BasicMealPlanningStrategy()
+    }
+
+    static Insulin novalog() {
+        new Insulin() {
+
+            @Override
+            boolean isFastActing() {
+                true
+            }
+
+            @Override
+            String getName() {
+                "Novalog"
+            }
+
+            @Override
+            String getDescription() {
+                "Insulin aspart (NovoLog)"
+            }
+        }
     }
 }

@@ -1,5 +1,8 @@
 package com.visionarysoftwaresolutions.smacker.testData
 
+import com.visionarysoftwaresolutions.eventr.Event
+import com.visionarysoftwaresolutions.smacker.api.User
+import com.visionarysoftwaresolutions.smacker.api.events.MealScheduled
 import com.visionarysoftwaresolutions.smacker.api.meals.MealAssistant
 import com.visionarysoftwaresolutions.smacker.api.events.MealNotification
 import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
@@ -9,28 +12,30 @@ import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 import groovy.time.Duration
 import groovy.time.TimeDuration
 
-class BasicMealAssistant implements MealAssistant {
-    MealSchedule theSchedule
+class MealRemindingAssistant implements MealAssistant {
     final Duration desired = new TimeDuration(0, 30, 0, 0)
-
-    BasicMealAssistant(MealSchedule schedule) {
-        theSchedule = schedule
-    }
+    MealScheduled lastReceived
 
     @Override
     void run() {
+        User user = lastReceived.user
         CalendarDay today = new SomeCalendarTime(new Date())
-        Meals planned = theSchedule.getMealsFor(today)
+        Meals planned = user.plannedMealsOn(today)
         planned.each { meal ->
             CalendarTime eaten = meal.eatenAt()
             Date scheduledAt = eaten.asDate()
             Date atThreshold = desired + new Date()
             if (scheduledAt <= atThreshold) {
-                MealNotification timeToEat = new MealNotification() {
-
-                }
-                theSchedule.owner.receive(timeToEat)
+                user.receive(lastReceived)
             }
+        }
+    }
+
+    @Override
+    void update(Event event) {
+        if (event instanceof MealScheduled) {
+            lastReceived = event as MealScheduled
+            run()
         }
     }
 }

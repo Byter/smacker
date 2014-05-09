@@ -15,8 +15,8 @@ import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 
 class Smacker implements User {
     String name, description
-    MealLog log = new MemoryMealLog(belongsTo: this)
-    MealSchedule schedule = new MemoryMealSchedule(belongsTo: this)
+    ObservableMealLog log = new MemoryMealLog(belongsTo: this)
+    ObservableMealSchedule schedule = new MemoryMealSchedule(belongsTo: this)
     PhysiqueLog bodies = new MemoryPhysiqueLog(owner: this)
     DietaryRestrictions restrictions = new UniqueDietaryRestrictions()
     Diet diet = new AnythingDiet()
@@ -86,5 +86,11 @@ class Smacker implements User {
     @Override
     boolean shouldEat(Meal toEat) {
         diet.isAcceptable(toEat) && restrictions.meetsRestrictions(toEat)
+    }
+
+    @Override
+    void addAssistant(MealAssistant assistant) {
+        log.add(assistant)
+        schedule.add(assistant)
     }
 }

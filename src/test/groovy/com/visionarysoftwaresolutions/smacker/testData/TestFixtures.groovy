@@ -10,7 +10,7 @@ import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.Ins
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItems
-import com.visionarysoftwaresolutions.smacker.api.meals.MealPlanningStrategy
+import com.visionarysoftwaresolutions.smacker.api.meals.planning.MealPlanningStrategy
 import com.visionarysoftwaresolutions.smacker.api.nutrition.Calories
 import com.visionarysoftwaresolutions.smacker.api.nutrition.Carbohydrates
 import com.visionarysoftwaresolutions.smacker.api.nutrition.Cholesterol
@@ -19,7 +19,7 @@ import com.visionarysoftwaresolutions.smacker.api.nutrition.NutritionalInformati
 import com.visionarysoftwaresolutions.smacker.api.nutrition.Protein
 import com.visionarysoftwaresolutions.smacker.api.nutrition.Sodium
 import com.visionarysoftwaresolutions.smacker.api.nutrition.Vitamins
-import com.visionarysoftwaresolutions.smacker.api.nutrition.analysis.TotalIntakeAnalyzer
+import com.visionarysoftwaresolutions.smacker.api.nutrition.analysis.NutritionalInformationCalculationStrategy
 import com.visionarysoftwaresolutions.smacker.api.physique.*
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
@@ -106,7 +106,7 @@ class TestFixtures {
         new SomeCalendarTime(new Date())
     }
 
-    static TotalIntakeAnalyzer intakeAnalyzer() {
+    static NutritionalInformationCalculationStrategy intakeAnalyzer() {
         new BasicIntakeAnalyzer()
     }
 

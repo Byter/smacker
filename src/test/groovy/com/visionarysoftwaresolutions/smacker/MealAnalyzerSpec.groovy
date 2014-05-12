@@ -1,6 +1,5 @@
 package com.visionarysoftwaresolutions.smacker
 
-import com.visionarysoftwaresolutions.smacker.api.*
 import com.visionarysoftwaresolutions.smacker.api.nutrition.*
 import com.visionarysoftwaresolutions.smacker.api.nutrition.analysis.*
 import com.visionarysoftwaresolutions.smacker.api.meals.*
@@ -17,7 +16,7 @@ class MealAnalyzerSpec extends spock.lang.Specification {
 			dinner.addItem(canOTuna)
 			dinner.addItem(fiberPlusBar)
 		when: "a total intake analyzer analyzes the meal"
-			TotalIntakeAnalyzer anal = TestFixtures.intakeAnalyzer()
+			NutritionalInformationCalculationStrategy anal = TestFixtures.intakeAnalyzer()
 			NutritionalInformation nut = anal.calculateFor(dinner)
 		then: "calories with 340 kCal total, 60 from fat"
             Calories calories = nut.getCalories()

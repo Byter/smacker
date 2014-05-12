@@ -8,6 +8,7 @@ import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestr
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.DietaryRestrictions
 import com.visionarysoftwaresolutions.smacker.api.events.MealNotification
 import com.visionarysoftwaresolutions.smacker.api.meals.*
+import com.visionarysoftwaresolutions.smacker.api.meals.planning.ObservableMealSchedule
 import com.visionarysoftwaresolutions.smacker.api.physique.Physique
 import com.visionarysoftwaresolutions.smacker.api.physique.PhysiqueLog
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay

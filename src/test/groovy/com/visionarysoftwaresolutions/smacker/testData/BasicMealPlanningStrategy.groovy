@@ -4,8 +4,8 @@ import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItems
-import com.visionarysoftwaresolutions.smacker.api.meals.MealPlanningStrategy
-import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
+import com.visionarysoftwaresolutions.smacker.api.meals.planning.MealPlanningStrategy
+import com.visionarysoftwaresolutions.smacker.api.meals.planning.MealSchedule
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 

@@ -1,4 +1,4 @@
-package com.visionarysoftwaresolutions.smacker.api.meals;
+package com.visionarysoftwaresolutions.smacker.api.meals.planning;
 
 import com.visionarysoftwaresolutions.eventr.Observable;
 

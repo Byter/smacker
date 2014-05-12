@@ -5,9 +5,8 @@ import com.visionarysoftwaresolutions.smacker.api.events.MealScheduled
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItem
 import com.visionarysoftwaresolutions.smacker.api.meals.MealItems
-import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals
-import com.visionarysoftwaresolutions.smacker.api.meals.ObservableMealSchedule
+import com.visionarysoftwaresolutions.smacker.api.meals.planning.ObservableMealSchedule
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
 

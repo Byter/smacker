@@ -3,7 +3,7 @@ package com.visionarysoftwaresolutions.smacker
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.meals.MealLog
-import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
+import com.visionarysoftwaresolutions.smacker.api.meals.planning.MealSchedule
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures
 
 class DietSpec extends spock.lang.Specification {

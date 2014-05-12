@@ -2,8 +2,8 @@ package com.visionarysoftwaresolutions.smacker
 
 import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
-import com.visionarysoftwaresolutions.smacker.api.meals.MealPlanningStrategy
-import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
+import com.visionarysoftwaresolutions.smacker.api.meals.planning.MealPlanningStrategy
+import com.visionarysoftwaresolutions.smacker.api.meals.planning.MealSchedule
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarDay
 import com.visionarysoftwaresolutions.smacker.testData.TestFixtures

@@ -5,7 +5,7 @@ import com.visionarysoftwaresolutions.smacker.api.User
 import com.visionarysoftwaresolutions.smacker.api.diet.Diet
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.MealLog
-import com.visionarysoftwaresolutions.smacker.api.meals.MealSchedule
+import com.visionarysoftwaresolutions.smacker.api.meals.planning.MealSchedule
 import com.visionarysoftwaresolutions.smacker.api.meals.MealValidationStrategy
 
 abstract class AbstractDiet implements Diet {

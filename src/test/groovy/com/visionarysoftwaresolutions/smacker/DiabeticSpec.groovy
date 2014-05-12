@@ -5,7 +5,7 @@ import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.Blo
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.Diabetes
 import com.visionarysoftwaresolutions.smacker.testData.DiabeticMealAssistant
 import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.Insulin
-import com.visionarysoftwaresolutions.smacker.api.events.InsulinDosageRecommendation
+import com.visionarysoftwaresolutions.smacker.api.diet.restrictions.diabetes.InsulinDosageRecommendation
 import com.visionarysoftwaresolutions.smacker.api.meals.Meal
 import com.visionarysoftwaresolutions.smacker.api.meals.Meals
 import com.visionarysoftwaresolutions.smacker.api.time.CalendarTime
@@ -58,11 +58,10 @@ class DiabeticSpec extends spock.lang.Specification {
             barb.addAssistant(ass)
         when: "barb eats a meal"
             Meal iceCream = TestFixtures.createDessert()
-        and: "barb logs the meal"
             barb.log(iceCream)
-        then: "the meal assistant runs to remind"
-            1 * ass.run()
-        and: "the user receives a meal reminder"
-            1 * barb.receive(_ as InsulinDosageRecommendation)
+        then: "the meal assistant gets the meal"
+            ass.lastRecorded.meal == iceCream
+        and: "the user is barb"
+            ass.lastRecorded.user == barb
     }
 }

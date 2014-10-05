@@ -23,7 +23,7 @@ class MemoryMealLog extends MemoryMealRepository implements ObservableMealLog {
         notifyObservers(new MealLogged() {
             @Override
             User getUser() {
-                return owner
+                return getOwner()
             }
 
             @Override

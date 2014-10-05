@@ -24,7 +24,7 @@ class MemoryMealSchedule extends MemoryMealRepository implements ObservableMealS
 
             @Override
             User getUser() {
-                return owner
+                return getOwner()
             }
 
             @Override
